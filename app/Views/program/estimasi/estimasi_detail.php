@@ -7,86 +7,135 @@
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Estimasi Perbaikan</li>
-        <li class="breadcrumb-item active">Form Detail Estimasi Perbaikan</li>
+        <li class="breadcrumb-item active">Estimasi</li>
+        <li class="breadcrumb-item active">Form Input Estimasi</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
-                    <h5 class="card-title">
-                        Detail Estimasi Perbaikan
+                    <h5 class="text-center">
+                        Input Data Estimasi
                     </h5>
                 </div>
-                <div class="card-body">
-                    <!-- DETAIL KODE -->
+                <?= helper('form'); ?>
+                <form class="card-body" action="/program/estimasi/save" method="POST">
+                    <?= csrf_field(); ?>
+                    <!-- Input Nama Pemilik -->
                     <div class="form-group row mb-2">
-                        <label for="kode_pegawai" class="col-md-3 col-form-label"><strong>Kode Pegawai</strong></label>
+                        <label for="id_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
                         <div class="col">
-                            <input type="text" id="kode_pegawai" name="kode_pegawai" class="form-control"
-                                value="<?= $pegawai['kode_pegawai']; ?>" disabled autofocus>
+                            <select class="form-select" id="id_pemilik" name="id_pemilik">
+                                <option selected>Nama Pemilik</option>
+                                <?php foreach($pemilik as $p): ?>
+                                <option value="<?= $p['id_pemilik']; ?>"><?= $p['nama_pemilik']; ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                     </div>
-                    <!-- DETAIL Nama -->
+                    <!-- Input Kendaraan -->
                     <div class="form-group row mb-2">
-                        <label for="nama_pegawai" class="col-md-3 col-form-label"><strong>Nama Pegawai</strong></label>
+                        <label for="id_mobil" class="col-md-3 col-form-label">Nomor Polisi</label>
                         <div class="col">
-                            <input type="text" id="nama_pegawai" name="nama_pegawai" class="form-control"
-                                value="<?= $pegawai['nama_pegawai']; ?>" disabled autofocus>
+                            <select class="form-select" id="id_mobil" name="id_mobil">
+                                <option selected>Nomor Polisi</option>
+                                <?php foreach($mobil as $m): ?>
+                                <option value="<?= $m['id_mobil']; ?>"><?= $m['nopol']; ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                     </div>
-                    <!-- DETAIL VENDOR -->
+                    <!-- Input Pegawai -->
                     <div class="form-group row mb-2">
-                        <label for="nama_vendor" class="col-md-3 col-form-label"><strong>Vendor</strong></label>
+                        <label for="id_pegawai" class="col-md-3 col-form-label">Nama Pegawai</label>
                         <div class="col">
-                            <input type="text" id="nama_vendor" name="nama_vendor" class="form-control"
-                                value="<?= $pegawai['nama_vendor']; ?>" disabled autofocus>
+                            <select class="form-select" id="id_pegawai" name="id_pegawai">
+                                <option selected>Nama Pegawai</option>
+                                <?php foreach($pegawai as $p): ?>
+                                <option value="<?= $p['id_pegawai']; ?>"><?= $p['nama_pegawai']; ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                     </div>
-                    <!-- DETAIL E-Mail -->
+                    <!-- Input Kode Estimasi -->
                     <div class="form-group row mb-2">
-                        <label for="e_mail_pegawai" class="col-md-3 col-form-label"><strong>E-Mail</strong></label>
+                        <label for="kode_estimasi" class="col-md-3 col-form-label">Kode Estimasi</label>
                         <div class="col">
-                            <input type="email" id="e_mail_pegawai" name="e_mail_pegawai" class="form-control"
-                                value="<?= $pegawai['e_mail_pegawai']; ?>" disabled>
+                            <input type="text"
+                                class="form-control <?= isset($validation['kode_estimasi']) ? 'is-invalid' : ''; ?>"
+                                id="kode_estimasi" name="kode_estimasi" value="<?= old('kode_estimasi');?>">
                         </div>
                     </div>
-                    <!-- DETAIL No. Telp -->
+                    <!-- Input Tanggal -->
                     <div class="form-group row mb-2">
-                        <label for="no_telp" class="col-md-3 col-form-label"><strong>Nomor Telepon</strong></label>
+                        <label for="tgl_estimasi" class="col-md-3 col-form-label">Tanggal Masuk</label>
                         <div class="col">
-                            <input type="tel" id="no_telp_pegawai" name="no_telp_pegawai" class="form-control"
-                                value="<?= $pegawai['no_telp_pegawai']; ?>" disabled>
+                            <input type="date"
+                                class="form-control <?= isset($validation['tgl_estimasi']) ? 'is-invalid' : ''; ?>"
+                                value="<?= old('tgl_estimasi');?>" id="tgl_estimasi" name="tgl_estimasi">
+
                         </div>
                     </div>
-                    <!-- DETAIL Alamat -->
-                    <div class="form-group row mb-3">
-                        <label for="alamat" class="col-md-3 col-form-label"><strong>Alamat</strong></label>
+                    <!-- Input Keluhan -->
+                    <div class="form-group row mb-2">
+                        <label for="keluhan" class="col-md-3 col-form-label">Keluhan</label>
                         <div class="col">
-                            <textarea class="form-control" id="alamat_pegawai" name="alamat_pegawai" cols="10" rows="10"
-                                disabled><?= $pegawai['alamat_pegawai']; ?></textarea>
+                            <textarea class="form-control <?= isset($validation['keluhan']) ? 'is-invalid' : ''; ?>"
+                                id="keluhan" name="keluhan" rows="3"><?= old('keluhan');?></textarea>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <a href="/program/edit/<?= $pegawai['id_pegawai']; ?>" class="btn btn-success">Edit</a>
-                            <form action="/program/pegawai/detail/<?= $pegawai['id_pegawai']; ?>" method="post"
-                                class="d-inline">
-                                <?= csrf_field(); ?>
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Apakah Yaking Ingin Menghapus data?')">Hapus</button>
-                            </form>
-                        </div>
-                        <div class="col text-end">
-                            <a href="/pegawai">Kembali Ke Halaman Utama</a>
+                    <!-- Input Jenis Perbaikan-->
+                    <div class="form-group row mb-2">
+                        <label for="jenis_servis" class="col-md-3 col-form-label">Detail Jenis Perbaikan</label>
+                        <div class="col" id="perbaikan">
+                            <select class="form-select" id="jenis_servis" name="jenis_servis">
+                                <option selected>pilih jenis perbaikan</option>
+                                <?php foreach($servis as $s):?>
+                                <option value="<?= $s['id_jenis_servis']; ?>"
+                                    data-harga="<?= $s['harga_jasa_servis']; ?>"><?= $s['jenis_servis']; ?>
+                                </option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                     </div>
-                </div>
+                    <!-- total Harga -->
+                    <div class="form-group row mb-2">
+                        <label for="total_harga_servis" class="col-md-3 col-form-label">Total Harga</label>
+                        <div class="col">
+                            <input type="text" class="form-control" id="total_harga_servis" name="total_harga_servis"
+                                readonly>
+                        </div>
+                    </div>
+                    <!-- Input Spare Part-->
+                    <div class="form-group row mb-2">
+                        <label for="spare_part" class="col-md-3 col-form-label">Detail Spare part</label>
+                        <div class="col" id="perbaikan">
+                            <select class="form-select" id="nama_part" name="nama_part">
+                                <option selected>pilih spare part</option>
+                                <?php foreach($parts as $p):?>
+                                <option value="<?= $p['id_part']; ?>" data-jumlah="<?= $p['harga']; ?>">
+                                    <?= $p['nama_part']; ?>
+                                </option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- total Harga -->
+                    <div class="form-group row mb-2">
+                        <label for="total_harga" class="col-md-3 col-form-label">Total Harga</label>
+                        <div class="col">
+                            <input type="text" class="form-control" id="total_harga" name="total_harga" readonly>
+                        </div>
+                    </div>
+                    <div class="row mx-auto" style="width: 100px;"><button type="submit"
+                            class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+<!-- TUTUP ISI KONTEN -->
 </main>
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
@@ -99,6 +148,52 @@
 </div>
 <!-- TUTUP LAYOUT -->
 <!-- SCRIPT JS -->
+<script>
+$(document).ready(function() {
+    // set initial total harga to 0
+    var totalHargaServis = 0;
+    $('#total_harga_servis').val(totalHargaServis);
+
+    // calculate total harga based on jenis servis selection
+    $('#jenis_servis').change(function() {
+        var selectedJenisServis = $('#jenis_servis').val();
+
+        // loop through selected jenis servis and sum up the harga
+        var newTotalHargaServis = 0;
+        selectedJenisServis.forEach(function(id) {
+            var hargaServis = $('#jenis_servis option[value="' + id + '"]').data('harga');
+            newTotalHargaServis += hargaServis;
+        });
+
+        // update total harga input
+        totalHargaServis = newTotalHargaServis;
+        $('#total_harga_servis').val(totalHargaServis);
+    });
+});
+
+// =======================================spare part=========================================
+$(document).ready(function() {
+    // set initial total harga to 0
+    var totalHarga = 0;
+    $('#total_harga').val(totalHarga);
+
+    // calculate total harga based on jenis servis selection
+    $('#nama_part').change(function() {
+        var selectedPart = $('#nama_part').val();
+
+        // loop through selected jenis servis and sum up the harga
+        var newTotalHarga = 0;
+        selectedPart.forEach(function(id) {
+            var harga = $('#nama_part option[value="' + id + '"]').data('jumlah');
+            newTotalHarga += harga;
+        });
+
+        // update total harga input
+        totalHarga = newTotalHarga;
+        $('#total_harga').val(totalHarga);
+    });
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
 <script src="/assets/js/jquery-3.6.4.min.js"></script>

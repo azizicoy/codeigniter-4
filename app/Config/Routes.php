@@ -49,6 +49,7 @@ $routes->get('/estimasi/print', 'Program\Estimasi::print'); // ROUTES KE CONTROL
 $routes->get('/estimasi/(:any)', 'Program\Estimasi::detail/$1'); // ROUTES KE CONTROLLER ESTIMASI
 
 $routes->get('/mobil', 'Program\Mobil::index'); // ROUTES KE CONTROLLER MOBIL
+$routes->get('/mobil/edit/(:segment)', 'Program\Mobil::edit/$1'); // ROUTES KE CONTROLLER EDIT
 $routes->delete('/mobil/(:num)', 'Program\Mobil::delete/$1'); // ROUTES KE CONTROLLER MOBIL
 $routes->get('/mobil/(:any)', 'Program\Mobil::detail/$1'); // ROUTES KE CONTROLLER MOBIL
 

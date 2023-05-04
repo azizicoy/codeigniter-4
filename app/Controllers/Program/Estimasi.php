@@ -35,8 +35,9 @@ class Estimasi extends BaseController
             'judul' => 'Estimasi Biaya | Program',
             'utama'       => 'Estimasi',
             'estimasi' => $this->estimasiModel->getEstimasi()
-        ];
 
+        ];
+// dd($data);
         return view('program/estimasi/estimasi_index', $data);
     }
 
@@ -82,21 +83,21 @@ class Estimasi extends BaseController
               $total_harga_servis += $jenisServis['harga_jasa_servis'];
           }
       }
-
+    //   dd($jenis_servis);
       // Menghitung total harga spare part
       $total_harga_spare_part = 0;
       $spare_part = $this->request->getVar('nama_part');
       if (!empty($spare_part)) {
-          foreach ($spare_part as $id => $jumlah) {
+          foreach ($spare_part as $id) {
               $sparePart = $this->sparePartModel->find($id);
-              $total_harga_spare_part += ($sparePart['harga'] * $jumlah);
+              $total_harga_spare_part += ($sparePart['harga'] * $id);
           }
       }
-
+        
     //   menghitung total estimasi biaya
         $total_estimasi_biaya = $total_harga_servis + $total_harga_spare_part;
         // inser data
-        $dump = $this->estimasiModel->save([
+       $this->estimasiModel->save([
             'id_mobil' => $this->request->getVar('id_mobil'),
             'id_pemilik' => $this->request->getVar('id_pemilik'),
             'id_pegawai' => $this->request->getVar('id_pegawai'),
@@ -106,7 +107,7 @@ class Estimasi extends BaseController
             'estimasi_biaya' => $total_estimasi_biaya
         ]);
 
-        dd($dump);
+        // dd($dump);
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan!');
 
         return redirect()->to('/program/estimasi/index');

@@ -38,29 +38,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1; ?>
-                            <?php foreach($estimasi as $e): ?>
+                            <?php $i = 1; foreach($estimasi as $e): ?>
                             <tr>
-                                <td><?= $i++; ?></td>
+                                <th scope="row"><?= $i++; ?></th>
                                 <td><?= $e['kode_estimasi']; ?></td>
                                 <td><?= $e['nopol']; ?></td>
                                 <td><?= $e['tgl_estimasi']; ?></td>
                                 <td><?= $e['keluhan']; ?></td>
                                 <td><?= $e['estimasi_biaya']; ?></td>
-                                <td><a href="/estimasi/<?= $e['id_estimasi']; ?>" class="btn btn-success">Detail</a>
+                                <td class="text-center"><a href="/e$eemilik/<?= $e['id_pemilik']; ?>"
+                                        class="btn btn-success"><i class="bi bi-pencil"></i> Detail</a>
                                 </td>
                             </tr>
-                            <?php endforeach?>
+                            <?php endforeach ?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>No</th>
-                                <th>Kode Estimasi</th>
-                                <th>Nomor Polisi</th>
-                                <th>Tanggal Estimasi</th>
-                                <th>Keluhan</th>
-                                <th>Estimasi Biaya</th>
-                                <th>Aksi</th>
+                                <td>No</td>
+                                <td>Kode Estimasi</td>
+                                <td>Nomor Polisi</td>
+                                <td>Tanggal Estimasi</td>
+                                <td>Keluhan</td>
+                                <td>Estimasi Biaya</td>
+                                <td>Aksi</td>
                             </tr>
                         </tfoot>
                     </table>

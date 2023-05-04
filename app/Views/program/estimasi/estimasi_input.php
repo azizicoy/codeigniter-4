@@ -111,7 +111,7 @@
                     <div class="form-group row mb-2">
                         <label for="jenis_servis" class="col-md-3 col-form-label">Detail Jenis Perbaikan</label>
                         <div class="col" id="perbaikan">
-                            <select class="form-select" id="jenis_servis" name="jenis_servis[]" multiple>
+                            <select class="form-select" id="jenis_servis" name="jenis_servis">
                                 <option selected>pilih jenis perbaikan</option>
                                 <?php foreach($servis as $s):?>
                                 <option value="<?= $s['id_jenis_servis']; ?>"
@@ -136,7 +136,7 @@
                     <div class="form-group row mb-2">
                         <label for="spare_part" class="col-md-3 col-form-label">Detail Spare part</label>
                         <div class="col" id="perbaikan">
-                            <select class="form-select" id="nama_part" name="nama_part[]" multiple>
+                            <select class="form-select" id="nama_part" name="nama_part">
                                 <option selected>pilih spare part</option>
                                 <?php foreach($parts as $p):?>
                                 <option value="<?= $p['id_part']; ?>" data-jumlah="<?= $p['harga']; ?>">

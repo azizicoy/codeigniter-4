@@ -156,17 +156,17 @@ class Mobil extends BaseController
 
         return redirect()->to('/program/mobil/index');
     }
-    public function search_pemilik()
+    public function edit($slug)
     {
-        $searchTerm = $this->request->getVar('term');
-    
-        $pemilik = $this->pemilikModel->searchPemilik($searchTerm);
-    
-        $data = array();
-        foreach ($pemilik as $row) {
-            $data[] = $row['nama_pemilik'];
-        }
-        echo json_encode($data);
+        helper('form');
+        $data = [
+            'judul' => 'Halaman Edit Mobil | Program',
+            'utama' => 'Mobil',
+            'validation' => session('validation'),
+            'mobil' => $this->mobilModel->getMobil($slug),
+            'pemilik' => $this->pemilikModel->getPemilik()
+        ];
+        return view('program/mobil/mobil_edit', $data);
     }
 
 }
