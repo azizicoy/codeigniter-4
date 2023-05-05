@@ -8,9 +8,6 @@ class MobilModel extends Model
 {
     protected $table            = 'tb_mobil';
     protected $primaryKey       = 'id_mobil';
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
     protected $allowedFields    = ['nopol', 'id_pemilik', 'jenis_kendaraan', 'no_chasis', 'no_mesin', 'warna', 'model', 'merk'];
 
     public function getMobil($slug = false)
