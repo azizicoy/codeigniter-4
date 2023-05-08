@@ -109,10 +109,10 @@
                     </div>
                     <!-- Input Jenis Perbaikan-->
                     <div class="form-group row mb-2">
-                        <label for="jenis_servis" class="col-md-3 col-form-label">Detail Jenis Perbaikan</label>
+                        <label for="jenis_servis" class="col-md-3 col-form-label">Detail Jenis Servis</label>
                         <div class="col" id="perbaikan">
                             <select class="form-select" id="jenis_servis" name="jenis_servis">
-                                <option selected>pilih jenis perbaikan</option>
+                                <option selected>Pilih Jenis Servis</option>
                                 <?php foreach($servis as $s):?>
                                 <option value="<?= $s['id_jenis_servis']; ?>"
                                     data-harga="<?= $s['harga_jasa_servis']; ?>"><?= $s['jenis_servis']; ?>
@@ -146,6 +146,13 @@
                             </select>
                             <div id="invalid" class="invalid-feedback">
                                 <?= $validation['nama_part'] ?? ''; ?>
+                            </div>
+                        </div>
+                        <!-- jumlah -->
+                        <label for="jumlah_part" class="col-md-3 col-form-label">Jumlah Part</label>
+                        <div class="col">
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="jumlah_part" name="jumlah_part" min="1">
                             </div>
                         </div>
                     </div>
@@ -187,18 +194,25 @@ $(document).ready(function() {
     $('#jenis_servis').change(function() {
         var selectedJenisServis = $('#jenis_servis').val();
 
-        // loop through selected jenis servis and sum up the harga
-        var newTotalHargaServis = 0;
-        selectedJenisServis.forEach(function(id) {
-            var hargaServis = $('#jenis_servis option[value="' + id + '"]').data('harga');
+        // check if selectedJenisServis is not null or undefined
+        if (selectedJenisServis) {
+            // sum up the harga of the selected jenis servis
+            var newTotalHargaServis = 0;
+            var hargaServis = $('#jenis_servis option[value="' + selectedJenisServis + '"]').data(
+                'harga');
             newTotalHargaServis += hargaServis;
-        });
 
-        // update total harga input
-        totalHargaServis = newTotalHargaServis;
-        $('#total_harga_servis').val(totalHargaServis);
+            // update total harga input
+            totalHargaServis = newTotalHargaServis;
+            $('#total_harga_servis').val(totalHargaServis);
+        } else {
+            // if no jenis servis is selected, set total harga to 0
+            totalHargaServis = 0;
+            $('#total_harga_servis').val(totalHargaServis);
+        }
     });
 });
+
 
 // =======================================spare part=========================================
 $(document).ready(function() {
@@ -206,20 +220,26 @@ $(document).ready(function() {
     var totalHarga = 0;
     $('#total_harga').val(totalHarga);
 
-    // calculate total harga based on jenis servis selection
-    $('#nama_part').change(function() {
+    // calculate total harga based on selected part and jumlah
+    $('#nama_part, #jumlah_part').change(function() {
         var selectedPart = $('#nama_part').val();
+        var jumlahPart = $('#jumlah_part').val();
 
-        // loop through selected jenis servis and sum up the harga
-        var newTotalHarga = 0;
-        selectedPart.forEach(function(id) {
-            var harga = $('#nama_part option[value="' + id + '"]').data('jumlah');
-            newTotalHarga += harga;
-        });
+        if (selectedPart) {
+            // sum up the harga of the selected part and multiply by jumlah
+            var newTotalHarga = 0;
+            var harga = $('#nama_part option[value="' + selectedPart + '"]').data(
+                'jumlah');
+            newTotalHarga += harga * jumlahPart;
 
-        // update total harga input
-        totalHarga = newTotalHarga;
-        $('#total_harga').val(totalHarga);
+            // update total harga input
+            totalHarga = newTotalHarga;
+            $('#total_harga').val(totalHarga);
+        } else {
+            // if no part is selected, set total harga to 0
+            totalHarga = 0;
+            $('#total_harga').val(totalHarga);
+        }
     });
 });
 </script>

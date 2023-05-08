@@ -18,7 +18,6 @@
                     <a class="nav-link" href="/pegawai">Pegawai</a>
                 </nav>
             </div>
-            <!-- End Layout -->
 
             <!-- layout -->
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse"
@@ -49,6 +48,10 @@
                 </nav>
             </div>
             <!-- End Layout -->
+            <a class="nav-link" href="/">
+                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-user"></i></div>
+                User
+            </a>
         </div>
     </div>
     <div class="sb-sidenav-footer">

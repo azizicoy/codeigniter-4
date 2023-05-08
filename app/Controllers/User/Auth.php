@@ -25,38 +25,49 @@ class Auth extends BaseController
         return view('program/auth/login', $data);
     }
 
-    public function login()
+    public function authenticate()
     {
+        // Ambil informasi username atau email dan password dari form login
+        $usernameOrEmail = $this->request->getVar('username_or_email');
+        $password = $this->request->getVar('password');
 
-        helper(['form']);
-        if (!$this->validate([
-            'username' => 
-            [
-                'rules' => 'required|min_length[3]|max_length[20]',
-                'errors' =>[
-                    'required' => 'username harus diisi',
-                    'min_length' => 'Username Harus Lebih Dari 3 Karakter',
-                    'max_length' => 'Username Tidak Boleh Lebih Dari 20 Karakter'
-                ]
-            ],
-            'password' => 
-            [
-                'rules' => 'required|min_length[3]|max_length[20]',
-                'errors' =>[
-                    'required' => 'password harus diisi',
-                    'min_length' => 'Password Harus Lebih Dari 5 Karakter',
-                    'max_length' => 'Password Tidak Boleh Lebih Dari 255 Karakter'
-                ]
-            ],
+        // Cari user berdasarkan username atau email yang dimasukkan
+        $user = $this->userModel->where('username', $usernameOrEmail)
+                          ->orWhere('e_mail', $usernameOrEmail)
+                          ->first();
 
-        ]))
-        {
-            return view('program/auth/login');
+        // Jika user ditemukan, verifikasi password
+        if ($user && password_verify($password, $this->userModel['password'])) {
+            // Ambil data user dan pegawai terkait dengan user yang sedang login
+            $user = $this->userModel->getWithPegawai($this->userModel['id']);
+
+            // Simpan data user dan pegawai ke dalam session
+            $session = session();
+            $sessionData = [
+                'id' => $this->userModel['id'],
+                'username' => $this->userModel['username'],
+                'role' => $this->userModel['role'],
+                'id_pegawai' => [
+                    'id_pegawai' => $this->pegawaiModel['id_pegawai'],
+                    'nama_pegawai' => $this->pegawaiModel['nama_pegawai']
+                ]
+            ];
+            $session->set($sessionData);
+
+            // Redirect ke halaman dashboard
+            return redirect()->to('/');
+        } else {
+            // Tampilkan pesan error dan redirect kembali ke halaman login
+            session()->setFlashdata('error', 'Username atau password salah.');
+            return redirect()->back();
         }
     }
 
-    public function auth()
+    public function logout()
     {
-        # code...
+        // Hapus data session dan redirect ke halaman login
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/login');
     }
 }

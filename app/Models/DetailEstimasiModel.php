@@ -8,7 +8,7 @@ class DetailEstimasiModel extends Model
 {
     protected $table            = 'tb_detail_estimasi';
     protected $primaryKey       = 'id_detail_estimasi';
-    protected $allowedFields    = ['nama_pemilik', 'e_mail', 'no_telp', 'alamat'];
+    protected $allowedFields    = ['id_estimasi', 'id_jenis_servis', 'harga_jasa_servis', 'id_part', 'jumlah_part', 'harga', 'subtotal'];
 
     public function getDetail($id = false)
     {
