@@ -18,6 +18,7 @@ class EstimasiModel extends Model
         ->join('tb_pegawai', 'tb_pegawai.id_pegawai = tb_estimasi_perbaikan.id_pegawai')
         ->join('tb_mobil', 'tb_mobil.id_mobil = tb_estimasi_perbaikan.id_mobil')
         ->join('tb_pemilik', 'tb_pemilik.id_pemilik = tb_estimasi_perbaikan.id_pemilik');
+
             if ($slug == false) 
         {
             return $query->findAll();

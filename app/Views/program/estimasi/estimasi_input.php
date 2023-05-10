@@ -86,7 +86,7 @@
                     <div class="form-group row mb-2">
                         <label for="tgl_estimasi" class="col-md-3 col-form-label">Tanggal Masuk</label>
                         <div class="col">
-                            <input type="date"
+                            <input type="datetime-local"
                                 class="form-control <?= isset($validation['tgl_estimasi']) ? 'is-invalid' : ''; ?>"
                                 value="<?= old('tgl_estimasi');?>" id="tgl_estimasi" name="tgl_estimasi">
                             <!-- error -->

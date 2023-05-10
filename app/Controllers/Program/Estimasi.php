@@ -80,7 +80,7 @@ class Estimasi extends BaseController
                   
       // Menghitung total harga servis
       $total_harga_servis = 0;
-      $jenis_servis = $this->request->getVar('jenis_servis');
+      $jenis_servis = explode(',', $this->request->getVar('jenis_servis'));
       if (!empty($jenis_servis)) {
           foreach ($jenis_servis as $id) {
               $jenisServis = $this->servisModel->find($id);
@@ -89,15 +89,15 @@ class Estimasi extends BaseController
       }
 
       // Menghitung total harga spare part
+      
       $total_harga_spare_part = 0;
-      $spare_part = $this->request->getVar('nama_part');
+      $spare_part = explode(',', $this->request->getVar('nama_part'));
       if (!empty($spare_part)) {
           foreach ($spare_part as $id) {
               $sparePart = $this->sparePartModel->find($id);
               $total_harga_spare_part += ($sparePart['harga'] * $id);
           }
       }
-      
         // menghitung total estimasi biaya
         $total_estimasi_biaya = $total_harga_servis + $total_harga_spare_part;
         
@@ -115,7 +115,7 @@ class Estimasi extends BaseController
   $idEstimasi = $this->estimasiModel->getInsertID();
     
   // Simpan data detail estimasi untuk jenis servis yang dipilih
-  $jenisServis = $this->request->getVar('jenis_servis');
+  $jenisServis = explode(',', $this->request->getVar('jenis_servis'));
   if (!empty($jenisServis)) {
       foreach ($jenisServis as $id) {
           $hargaServis = $this->servisModel->find($id)['harga_jasa_servis'];
@@ -129,14 +129,16 @@ class Estimasi extends BaseController
   }
   
   // Simpan data detail estimasi untuk spare part yang dipilih
-  $sparePart = $this->request->getVar('nama_part');
+  $sparePart = explode(',', $this->request->getVar('nama_part'));
+  dd($sparePart);
   if (!empty($sparePart)) {
-      foreach ($sparePart as $id => $jumlah) {
+      foreach ($sparePart as $id => $jumlah ) 
+      {
           $hargaSparePart = $this->sparePartModel->find($id)['harga'];
           $subtotal = $hargaSparePart * $jumlah;
           $this->detailEstimasiModel->insert([
               'id_estimasi' => $idEstimasi,
-              'id_spare_part' => $id,
+              'id_part' => $id,
               'harga' => $hargaSparePart,
               'jumlah_part' => $jumlah,
               'subtotal' => $subtotal
