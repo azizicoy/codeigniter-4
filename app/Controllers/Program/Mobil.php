@@ -17,7 +17,7 @@ class Mobil extends BaseController
         helper(['url']);
         $this->mobilModel = new MobilModel();
         $this->pemilikModel = new PemilikModel();
-        helper('form');
+        
     }
     public function index()
     {
@@ -47,8 +47,10 @@ class Mobil extends BaseController
 
     public function input()
     {
-        $pemilik = $this->pemilikModel->getPemilik();
         helper('form');
+        // Variabel Instance pemilikModel
+        $pemilik = $this->pemilikModel->getPemilik();
+        
         $data = [
             'judul' => 'Halaman Input Mobil | Program',
             'utama' => 'Mobil',
@@ -71,20 +73,12 @@ class Mobil extends BaseController
                 'is_unique' => 'Nomor Polisi sudah terdaftar' 
             ]
         ],
-        'nama_pemilik' => 
-        [
-            'rules' => 'required|is_unique[tb_mobil.nama_pemilik]',
-            'errors' =>[
-                'required' => 'Nama Pemilik harus diisi',
-                'is_unique' => 'Nama Pemilik sudah terdaftar' 
-            ]
-        ],
         'id_pemilik' => 
         [
             'rules' => 'required|is_unique[tb_mobil.id_pemilik]',
             'errors' =>[
-                'required' => 'Id Pemilik harus diisi',
-                'is_unique' => 'Id Pemilik sudah terdaftar' 
+                'required' => 'Nama Pemilik harus diisi',
+                'is_unique' => 'Nama Pemilik sudah terdaftar' 
             ]
         ],
         'jenis_kendaraan' => 
@@ -135,23 +129,19 @@ class Mobil extends BaseController
         {
             return redirect()->to('/program/mobil/input')->withInput()->with('validation', $this->validator->getErrors());
         }
-
-        // $namaPemilik = $this->request->getVar('nama_pemilik');
-        // $idPemilik = $this->pemilikModel->getid
-        // Insert Data
-        $this->pemilikModel->save
-        ([
-            'nopol' => $this->request->getPost('nopol'),
-            'id_pemilik' => $this->request->getPost('id_pemilik'),
-            'nama_pemilik' => $this->request->getPost('nama_pemilik'),
-            'jenis_kendaraan' => $this->request->getPost('jenis_kendaraan'),
-            'no_chasis' => $this->request->getPost('no_chasis'),
-            'no_mesin' => $this->request->getPost('no_mesin'),
-            'warna' => $this->request->getPost('warna'),
-            'model' => $this->request->getPost('model'),
-            'merk' => $this->request->getPost('merk'),
-        ]);
         
+        // Insert Data
+        $mo = $this->mobilModel->save
+        ([
+            'nopol' => $this->request->getVar('nopol'),
+            'id_pemilik' => $this->request->getVar('id_pemilik'),
+            'jenis_kendaraan' => $this->request->getVar('jenis_kendaraan'),
+            'no_chasis' => $this->request->getVar('no_chasis'),
+            'no_mesin' => $this->request->getVar('no_mesin'),
+            'warna' => $this->request->getVar('warna'),
+            'model' => $this->request->getVar('model'),
+            'merk' => $this->request->getVar('merk'),
+        ]);
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan!');
 
         return redirect()->to('/program/mobil/index');

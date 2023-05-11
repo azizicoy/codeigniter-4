@@ -46,7 +46,7 @@
                                 <td><?= $e['tgl_estimasi']; ?></td>
                                 <td><?= $e['keluhan']; ?></td>
                                 <td><?= $e['estimasi_biaya']; ?></td>
-                                <td class="text-center"><a href="/e$eemilik/<?= $e['id_pemilik']; ?>"
+                                <td class="text-center"><a href="/estimasi/<?= $e['id_estimasi']; ?>"
                                         class="btn btn-success"><i class="bi bi-pencil"></i> Detail</a>
                                 </td>
                             </tr>

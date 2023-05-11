@@ -7,7 +7,7 @@
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Pemilik</li>
+        <li class="breadcrumb-item active"><a href="/pemilik">Pemilik</a></li>
         <li class="breadcrumb-item active">Form Input Pemilik</li>
     </ol>
     <div class="row">

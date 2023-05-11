@@ -7,7 +7,7 @@
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Mobil</li>
+        <li class="breadcrumb-item active"><a href="/mobil">Mobil</a></li>
         <li class="breadcrumb-item active">Form Input Mobil</li>
     </ol>
     <div class="row">
@@ -36,14 +36,16 @@
                     </div>
                     <!-- Nama Pemilik -->
                     <div class="form-group row mb-2">
-                        <label for="nama_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
+                        <label for="nama_pemilik" class="col-md-3 col-form-label"><strong>Nama Pemilik</strong></label>
                         <div class="col">
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" id="id_pemilik" name="id_pemilik"
+                                aria-label="Default select example">
                                 <option selected>pilih salah satu</option>
                                 <?php foreach ($pemilik as $p): ?>
                                 <option value="<?= $p['id_pemilik']; ?>"><?= $p['nama_pemilik']; ?></option>
                                 <?php endforeach ?>
                             </select>
+                            <!-- error -->
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 <?= $validation['nama_pemilik'] ?? ''; ?>
                             </div>
@@ -125,7 +127,7 @@
                     </div>
                     <!-- merk -->
                     <div class="form-group row mb-2">
-                        <label for="merk" class="col-md-3 col-form-label">Merk</label>
+                        <label for="merk" class="col-md-3 col-form-label"><strong>Merk</strong></label>
                         <div class="col">
                             <input type="text" id="merk" name="merk"
                                 class="form-control <?= isset($validation['merk']) ? 'is-invalid' : ''; ?>"
@@ -147,7 +149,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+            <div class="text-muted">Copyright &copy; Your Website <?= date('Y'); ?></div>
         </div>
     </div>
 </footer>

@@ -47,9 +47,10 @@ class Estimasi extends BaseController
     public function detail($slug)
     {
         $data = [
-            'judul' => 'Halaman Estimasi | Program',
-            'utama' => 'Estimasi',
-            'estimasi' => $this->estimasiModel->getEstimasi($slug)
+            'judul'     => 'Halaman Estimasi | Program',
+            'utama'     => 'Estimasi',
+            'estimasi'  => $this->estimasiModel->getEstimasi($slug),
+            'detail'    => $this->detailEstimasiModel->getDetail($slug),
         ];
         
         if (empty($data['estimasi'])) {
@@ -77,76 +78,52 @@ class Estimasi extends BaseController
     public function save()
     {
         helper('form');
-                  
-      // Menghitung total harga servis
-      $total_harga_servis = 0;
-      $jenis_servis = explode(',', $this->request->getVar('jenis_servis'));
-      if (!empty($jenis_servis)) {
-          foreach ($jenis_servis as $id) {
-              $jenisServis = $this->servisModel->find($id);
-              $total_harga_servis += $jenisServis['harga_jasa_servis'];
-          }
-      }
-
-      // Menghitung total harga spare part
-      
-      $total_harga_spare_part = 0;
-      $spare_part = explode(',', $this->request->getVar('nama_part'));
-      if (!empty($spare_part)) {
-          foreach ($spare_part as $id) {
-              $sparePart = $this->sparePartModel->find($id);
-              $total_harga_spare_part += ($sparePart['harga'] * $id);
-          }
-      }
-        // menghitung total estimasi biaya
-        $total_estimasi_biaya = $total_harga_servis + $total_harga_spare_part;
-        
-        // inser data
-       $dump = $this->estimasiModel->save([
-            'id_mobil' => $this->request->getVar('id_mobil'),
-            'id_pemilik' => $this->request->getVar('id_pemilik'),
-            'id_pegawai' => $this->request->getVar('id_pegawai'),
-            'kode_estimasi' => $this->request->getVar('kode_estimasi'),
-            'tgl_estimasi' => $this->request->getVar('tgl_estimasi'),
-            'keluhan' => $this->request->getVar('keluhan'),
-            'estimasi_biaya' => $total_estimasi_biaya
-        ]);
-  // Ambil ID dari estimasi perbaikan yang baru saja disimpan
-  $idEstimasi = $this->estimasiModel->getInsertID();
+        $hargaServis = $this->request->getVar('total_harga_servis');
+        $hargaSpart = $this->request->getVar('total_harga');
+        $jumlah = $this->request->getVar('jumlah_part');
     
-  // Simpan data detail estimasi untuk jenis servis yang dipilih
-  $jenisServis = explode(',', $this->request->getVar('jenis_servis'));
-  if (!empty($jenisServis)) {
-      foreach ($jenisServis as $id) {
-          $hargaServis = $this->servisModel->find($id)['harga_jasa_servis'];
-          $this->detailEstimasiModel->insert([
-              'id_estimasi' => $idEstimasi,
-              'id_jenis_servis' => $id,
-              'harga_jasa_servis' => $hargaServis,
-              'subtotal' => $hargaServis
-          ]);
-      }
-  }
-  
-  // Simpan data detail estimasi untuk spare part yang dipilih
-  $sparePart = explode(',', $this->request->getVar('nama_part'));
-  dd($sparePart);
-  if (!empty($sparePart)) {
-      foreach ($sparePart as $id => $jumlah ) 
-      {
-          $hargaSparePart = $this->sparePartModel->find($id)['harga'];
-          $subtotal = $hargaSparePart * $jumlah;
-          $this->detailEstimasiModel->insert([
-              'id_estimasi' => $idEstimasi,
-              'id_part' => $id,
-              'harga' => $hargaSparePart,
-              'jumlah_part' => $jumlah,
-              'subtotal' => $subtotal
-          ]);
-      }
-  }
-        // dd($dump);
-        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan!');
+        // Hitung subtotal
+        $subtotal = $hargaServis + ($hargaSpart * $jumlah);
+    
+        // Insert data yang diambil dari View estimasi_input
+        $data = [
+            'id_pemilik'         => $this->request->getVar('id_pemilik'),
+            'id_mobil'           => $this->request->getVar('id_mobil'),
+            'id_pegawai'         => $this->request->getVar('id_pegawai'),
+            'keluhan'            => $this->request->getVar('keluhan'),
+            'kode_estimasi'      => $this->request->getVar('kode_estimasi'),
+            'tgl_estimasi'       => $this->request->getVar('tgl_estimasi'),
+            'estimasi_biaya'     => $subtotal
+        ];
+        // Insert Data Ke Estimasi Model
+        $this->estimasiModel->insert($data);
+
+        // Ambil Id dari Data Yang Tersimpan
+        $idEstimasi = $this->estimasiModel->getInsertID();
+
+        // variabel harga servis
+        $hargaServis = $this->request->getVar('total_harga_servis');
+
+        // variabel harga spart
+        $hargaSpart = $this->request->getVar('total_harga');
+
+        // jumlah part
+        $jumlah = $this->request->getVar('jumlah_part');
+
+        // total harga servis + harga part
+        $subtotal = $hargaServis += $hargaSpart;
+        
+        // Insert data yang diambil dari atas
+        $dataServis = [
+            'id_estimasi'       => $idEstimasi,
+            'id_jenis_servis'   => $this->request->getVar('jenis_servis'),
+            'id_part'           => $this->request->getVar('nama_part'),
+            'harga_jasa_servis' => $hargaServis,
+            'jumlah_part'       => $jumlah,
+            'harga'             => $hargaSpart,
+            'subtotal'          => $subtotal
+        ];
+        $this->detailEstimasiModel->insert($dataServis);
 
         return redirect()->to('/program/estimasi/index');
     }

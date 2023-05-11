@@ -8,9 +8,7 @@ class EstimasiModel extends Model
 {
     protected $table            = 'tb_estimasi_perbaikan';
     protected $primaryKey       = 'id_estimasi';
-    protected $returnType       = 'array';
-    protected $protectFields    = true;
-    protected $allowedFields    = ['id_mobil', 'id_pemilik', 'id_pegawai', 'kode_estimasi', 'tgl_estimasi', 'keluhan', 'estimasi_biaya'];
+    protected $allowedFields    = ['id_estimasi', 'id_mobil', 'id_pemilik', 'id_pegawai', 'kode_estimasi', 'tgl_estimasi', 'keluhan', 'estimasi_biaya'];
 
     public function getEstimasi($slug = false)
     {

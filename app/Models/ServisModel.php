@@ -11,7 +11,7 @@ class ServisModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['kode_jenis_servis', 'jenis_servis', 'harga_jasa_servis'];
+    protected $allowedFields    = ['jenis_servis', 'harga_jasa_servis'];
 
     public function getServis()
     {

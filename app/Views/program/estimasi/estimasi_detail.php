@@ -18,119 +18,99 @@
                         Input Data Estimasi
                     </h5>
                 </div>
-                <?= helper('form'); ?>
-                <form class="card-body" action="/program/estimasi/save" method="POST">
-                    <?= csrf_field(); ?>
-                    <!-- Input Nama Pemilik -->
-                    <div class="form-group row mb-2">
-                        <label for="id_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
-                        <div class="col">
-                            <select class="form-select" id="id_pemilik" name="id_pemilik">
-                                <option selected>Nama Pemilik</option>
-                                <?php foreach($pemilik as $p): ?>
-                                <option value="<?= $p['id_pemilik']; ?>"><?= $p['nama_pemilik']; ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
+                <!-- Form Detail -->
+                <!-- Detail Nama Pemilik -->
+                <div class="form-group row mb-2">
+                    <label for="id_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
+                    <div class="col">
+                        <input type="text" id="nama_pemilik" name="nama_pemilik" class="form-control"
+                            value="<?= $estimasi['nama_pemilik']; ?>" disabled autofocus>
                     </div>
-                    <!-- Input Kendaraan -->
-                    <div class="form-group row mb-2">
-                        <label for="id_mobil" class="col-md-3 col-form-label">Nomor Polisi</label>
-                        <div class="col">
-                            <select class="form-select" id="id_mobil" name="id_mobil">
-                                <option selected>Nomor Polisi</option>
-                                <?php foreach($mobil as $m): ?>
-                                <option value="<?= $m['id_mobil']; ?>"><?= $m['nopol']; ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
+                </div>
+                <!-- Detail Kendaraan -->
+                <div class="form-group row mb-2">
+                    <label for="nopol" class="col-md-3 col-form-label">Nomor Polisi</label>
+                    <div class="col">
+                        <input type="text" id="nopol" name="nopol" class="form-control"
+                            value="<?= $estimasi['nopol']; ?>" disabled autofocus>
                     </div>
-                    <!-- Input Pegawai -->
-                    <div class="form-group row mb-2">
-                        <label for="id_pegawai" class="col-md-3 col-form-label">Nama Pegawai</label>
-                        <div class="col">
-                            <select class="form-select" id="id_pegawai" name="id_pegawai">
-                                <option selected>Nama Pegawai</option>
-                                <?php foreach($pegawai as $p): ?>
-                                <option value="<?= $p['id_pegawai']; ?>"><?= $p['nama_pegawai']; ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
+                </div>
+                <!-- Detail Pegawai -->
+                <div class="form-group row mb-2">
+                    <label for="nama_pegawai" class="col-md-3 col-form-label">Nama Pegawai</label>
+                    <div class="col">
+                        <input type="text" id="nama_pegawai" name="nama_pegawai" class="form-control"
+                            value="<?= $estimasi['nama_pegawai']; ?>" disabled autofocus>
                     </div>
-                    <!-- Input Kode Estimasi -->
-                    <div class="form-group row mb-2">
-                        <label for="kode_estimasi" class="col-md-3 col-form-label">Kode Estimasi</label>
-                        <div class="col">
-                            <input type="text"
-                                class="form-control <?= isset($validation['kode_estimasi']) ? 'is-invalid' : ''; ?>"
-                                id="kode_estimasi" name="kode_estimasi" value="<?= old('kode_estimasi');?>">
-                        </div>
+                </div>
+                <!-- Detail Kode Estimasi -->
+                <div class="form-group row mb-2">
+                    <label for="kode_estimasi" class="col-md-3 col-form-label">Kode Estimasi</label>
+                    <div class="col">
+                        <input type="text" id="kode_estimasi" name="kode_estimasi" class="form-control"
+                            value="<?= $estimasi['kode_estimasi']; ?>" disabled autofocus>
                     </div>
-                    <!-- Input Tanggal -->
-                    <div class="form-group row mb-2">
-                        <label for="tgl_estimasi" class="col-md-3 col-form-label">Tanggal Masuk</label>
-                        <div class="col">
-                            <input type="date"
-                                class="form-control <?= isset($validation['tgl_estimasi']) ? 'is-invalid' : ''; ?>"
-                                value="<?= old('tgl_estimasi');?>" id="tgl_estimasi" name="tgl_estimasi">
+                </div>
+                <!-- Detail Tanggal -->
+                <div class="form-group row mb-2">
+                    <label for="kode_estimasi" class="col-md-3 col-form-label">Tanggal</label>
+                    <div class="col">
+                        <input type="datetime-local" id="tgl_estimasi" name="tgl_estimasi" class="form-control"
+                            value="<?= $estimasi['tgl_estimasi']; ?>" disabled autofocus>
+                    </div>
+                </div>
+                <!-- Detail Keluhan -->
+                <div class="form-group row mb-2">
+                    <label for="keluhan" class="col-md-3 col-form-label">Keluhan</label>
+                    <div class="col">
+                        <input type="text" id="keluhan" name="keluhan" class="form-control"
+                            value="<?= $estimasi['keluhan']; ?>" disabled autofocus>
+                    </div>
+                </div>
+                <!-- Detail Jenis Perbaikan-->
+                <div class="form-group row mb-2">
+                    <label for="jenis_servis" class="col-md-3 col-form-label">Jenis Perbaikan</label>
+                    <div class="col">
+                        <input type="text" id="jenis_servis" name="jenis_servis" class="form-control"
+                            value="<?= $detail['jenis_servis']; ?>" disabled autofocus>
+                    </div>
+                </div>
+                <!-- total Harga Jenis Servis -->
+                <div class="form-group row mb-2">
+                    <label for="harga_jasa_servis" class="col-md-3 col-form-label">Harga Jenis Perbaikan</label>
+                    <div class="col">
+                        <input type="number" id="harga_jasa_servis" name="harga_jasa_servis" class="form-control"
+                            value="<?= $detail['harga_jasa_servis']; ?>" disabled autofocus>
+                    </div>
+                </div>
+                <!-- Input Spare Part-->
+                <div class="form-group row mb-2">
+                    <label for="nama_part" class="col-md-3 col-form-label">Nama Spare Part</label>
+                    <div class="col">
+                        <input type="text" id="nama_part" name="nama_part" class="form-control"
+                            value="<?= $detail['nama_part']; ?>" disabled autofocus>
+                    </div>
+                </div>
+                <!-- total Harga Part-->
+                <div class="form-group row mb-2">
+                    <label for="harga" class="col-md-3 col-form-label">Harga Jenis Perbaikan</label>
+                    <div class="col">
+                        <input type="number" id="harga" name="harga" class="form-control"
+                            value="<?= $detail['harga']; ?>" disabled autofocus>
+                    </div>
+                </div>
+                <!-- Subtotal-->
+                <div class="form-group row mb-2">
+                    <label for="subtotal" class="col-md-3 col-form-label">Subtotal</label>
+                    <div class="col">
+                        <input type="number" id="subtotal" name="subtotal" class="form-control"
+                            value="<?= $detail['subtotal']; ?>" disabled autofocus>
+                    </div>
+                </div>
+                <div class="row mx-auto" style="width: 100px;"><button type="submit"
+                        class="btn btn-primary">Submit</button>
+                </div>
 
-                        </div>
-                    </div>
-                    <!-- Input Keluhan -->
-                    <div class="form-group row mb-2">
-                        <label for="keluhan" class="col-md-3 col-form-label">Keluhan</label>
-                        <div class="col">
-                            <textarea class="form-control <?= isset($validation['keluhan']) ? 'is-invalid' : ''; ?>"
-                                id="keluhan" name="keluhan" rows="3"><?= old('keluhan');?></textarea>
-                        </div>
-                    </div>
-                    <!-- Input Jenis Perbaikan-->
-                    <div class="form-group row mb-2">
-                        <label for="jenis_servis" class="col-md-3 col-form-label">Detail Jenis Perbaikan</label>
-                        <div class="col" id="perbaikan">
-                            <select class="form-select" id="jenis_servis" name="jenis_servis">
-                                <option selected>pilih jenis perbaikan</option>
-                                <?php foreach($servis as $s):?>
-                                <option value="<?= $s['id_jenis_servis']; ?>"
-                                    data-harga="<?= $s['harga_jasa_servis']; ?>"><?= $s['jenis_servis']; ?>
-                                </option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- total Harga -->
-                    <div class="form-group row mb-2">
-                        <label for="total_harga_servis" class="col-md-3 col-form-label">Total Harga</label>
-                        <div class="col">
-                            <input type="text" class="form-control" id="total_harga_servis" name="total_harga_servis"
-                                readonly>
-                        </div>
-                    </div>
-                    <!-- Input Spare Part-->
-                    <div class="form-group row mb-2">
-                        <label for="spare_part" class="col-md-3 col-form-label">Detail Spare part</label>
-                        <div class="col" id="perbaikan">
-                            <select class="form-select" id="nama_part" name="nama_part">
-                                <option selected>pilih spare part</option>
-                                <?php foreach($parts as $p):?>
-                                <option value="<?= $p['id_part']; ?>" data-jumlah="<?= $p['harga']; ?>">
-                                    <?= $p['nama_part']; ?>
-                                </option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- total Harga -->
-                    <div class="form-group row mb-2">
-                        <label for="total_harga" class="col-md-3 col-form-label">Total Harga</label>
-                        <div class="col">
-                            <input type="text" class="form-control" id="total_harga" name="total_harga" readonly>
-                        </div>
-                    </div>
-                    <div class="row mx-auto" style="width: 100px;"><button type="submit"
-                            class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -148,52 +128,6 @@
 </div>
 <!-- TUTUP LAYOUT -->
 <!-- SCRIPT JS -->
-<script>
-$(document).ready(function() {
-    // set initial total harga to 0
-    var totalHargaServis = 0;
-    $('#total_harga_servis').val(totalHargaServis);
-
-    // calculate total harga based on jenis servis selection
-    $('#jenis_servis').change(function() {
-        var selectedJenisServis = $('#jenis_servis').val();
-
-        // loop through selected jenis servis and sum up the harga
-        var newTotalHargaServis = 0;
-        selectedJenisServis.forEach(function(id) {
-            var hargaServis = $('#jenis_servis option[value="' + id + '"]').data('harga');
-            newTotalHargaServis += hargaServis;
-        });
-
-        // update total harga input
-        totalHargaServis = newTotalHargaServis;
-        $('#total_harga_servis').val(totalHargaServis);
-    });
-});
-
-// =======================================spare part=========================================
-$(document).ready(function() {
-    // set initial total harga to 0
-    var totalHarga = 0;
-    $('#total_harga').val(totalHarga);
-
-    // calculate total harga based on jenis servis selection
-    $('#nama_part').change(function() {
-        var selectedPart = $('#nama_part').val();
-
-        // loop through selected jenis servis and sum up the harga
-        var newTotalHarga = 0;
-        selectedPart.forEach(function(id) {
-            var harga = $('#nama_part option[value="' + id + '"]').data('jumlah');
-            newTotalHarga += harga;
-        });
-
-        // update total harga input
-        totalHarga = newTotalHarga;
-        $('#total_harga').val(totalHarga);
-    });
-});
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
 <script src="/assets/js/jquery-3.6.4.min.js"></script>
