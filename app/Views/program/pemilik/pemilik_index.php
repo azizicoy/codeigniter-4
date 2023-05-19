@@ -42,7 +42,7 @@
                         <td><?= $p['alamat']; ?></td>
                         <td><?= $p['e_mail']; ?></td>
                         <td class="text-center"><a href="/pemilik/<?= $p['id_pemilik']; ?>" class="btn btn-success"><i
-                                    class="bi bi-pencil"></i> Detail</a>
+                                    class="bi bi-info-circle"></i></i> Detail</a>
                         </td>
                     </tr>
                     <?php endforeach?>
@@ -82,9 +82,33 @@
 </script>
 <script>
 $(document).ready(function() {
-    $('#dataTable').DataTable();
+    $('#dataTable').DataTable({
+        "columnDefs": [{
+            "targets": 0,
+            "orderable": false,
+            "searchable": false,
+        }],
+        "order": [
+            [1, "asc"]
+        ], // Mengurutkan berdasarkan kolom kedua (nama_pemilik) secara ascending
+        "drawCallback": function(settings) {
+            var api = this.api();
+            var rows = api.rows({
+                page: 'current'
+            }).nodes();
+            var start = api.page.info().start;
+
+            // Atur nomor urutan
+            api.column(0, {
+                page: 'current'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = start + i + 1;
+            });
+        }
+    });
 });
 </script>
+
 <script src="/assets/js/scripts.js"></script>
 <script src="/assets/js/datatables-simple-demo.js"></script>
 <?= $this->endSection(); ?>

@@ -42,8 +42,8 @@
                                 <td><?= $p['nama_part']; ?></td>
                                 <td><?= $p['harga']; ?></td>
                                 <td><?= $p['jumlah_part']; ?></td>
-                                <td class="text-center"><a href="/part/<?= $p['id_part']; ?>"
-                                        class="btn btn-success">Detail</a>
+                                <td class="text-center"><a href="/part/<?= $p['id_part']; ?>" class="btn btn-success"><i
+                                            class="bi bi-info-circle"></i> Detail</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

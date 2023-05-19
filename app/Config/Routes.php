@@ -30,12 +30,12 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/login', 'User\Auth::index');
-$routes->post('/auth/authenticate', 'User\Auth::authenticate');
+$routes->get('/', 'User\Auth::index');
+
+$routes->post('/auth/validasi', 'User\Auth::validasi');
 
 $routes->get('/profile', 'User\Register::index');
 
-$routes->get('/', 'Program\Program::index'); // ROUTES KE HOME INDEX PROGRAM
 $routes->get('/program', 'Program\Program::index'); // ROUTES KE HOME INDEX PROGRAM
 
 $routes->get('/pemilik', 'Program\Pemilik::index'); // ROUTES KE CONTROLLER PEMILIK
@@ -49,7 +49,9 @@ $routes->get('/pegawai/edit/(:segment)', 'Program\Pegawai::edit/$1'); // ROUTES 
 $routes->get('/pegawai/(:any)', 'Program\Pegawai::detail/$1'); // ROUTES KE CONTROLLER PEGAWAI DETAIL
 
 $routes->get('/estimasi', 'Program\Estimasi::index'); // ROUTES KE CONTROLLER ESTIMASI
-$routes->get('/estimasi/print', 'Program\Estimasi::print'); // ROUTES KE CONTROLLER ESTIMASI PRINT
+$routes->get('/estimasi/edit/(:segment)', 'Program\Estimasi::edit/$1'); // ROUTES KE CONTROLLER EDIT
+$routes->get('/estimasi/prev/(:any)', 'Program\Estimasi::prev/$1'); // ROUTES KE CONTROLLER ESTIMASI PRINT
+$routes->delete('/program/estimasi/(:num)', 'Program\Estimasi::delete/$1'); // ROUTES KE CONTROLLER DELETE
 $routes->get('/estimasi/(:any)', 'Program\Estimasi::detail/$1'); // ROUTES KE CONTROLLER ESTIMASI
 
 $routes->get('/mobil', 'Program\Mobil::index'); // ROUTES KE CONTROLLER MOBIL
@@ -62,6 +64,10 @@ $routes->get('/part', 'Program\Part::index'); // ROUTES KE CONTROLLER PART
 $routes->get('/penjadwalan', 'Program\Penjadwalan::index'); // ROUTES KE CONTROLLER PENJADWALAN
 
 $routes->get('/servis', 'Program\Servis::index'); // ROUTES KE CONTROLLER JENIS SERVIS
+
+
+
+$routes->get('/estimasi-print', 'Program\Estimasi::contoh/'); // ROUTES KE CONTROLLER ESTIMASI PRINT
 
 // $routes->get('/', 'Pemilik::index');
 /*

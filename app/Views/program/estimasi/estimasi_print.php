@@ -16,9 +16,12 @@
             <!-- colum ikon -->
             <div class="col-md-9">
                 <h6>PT. SEJAHTERA BUANA TRADA - BODY REPAIR</h6>
-                <h6>JL. Raya Bekasi KM. 19 Pulogadung</h6>
-                <h6>Rawa Terate - Cakung</h6>
-                <h6>Jakarta Timur 13920 - TELP : (021) 4609308</h6>
+                <p>JL. Raya Bekasi KM. 19 Pulogadung
+                    <br>
+                    Rawa Terate - Cakung
+                    <br>
+                    Jakarta Timur 13920 - TELP : (021) 4609308
+                </p>
             </div>
             <!-- kolom tanggal estimasi -->
             <div class="col">
@@ -28,9 +31,9 @@
                 <div class="jam">Kode Estimasi</div>
             </div>
             <div class="col">
-                <div class="tgl">: </div>
-                <div class="jam">: </div>
-                <div class="jam">: </div>
+                <!-- tanggal estimasi -->
+                <div class="tgl">: <?= $estimasi['tgl_estimasi']; ?></div>
+                <div class="jam">: <?= $estimasi['kode_estimasi']; ?></div>
             </div>
         </div>
         <hr>
@@ -61,7 +64,7 @@
         <p>
         <div class="row">
             <div class="col">
-                <table id="dataTable" class="table table-striped" style="width:100%">
+                <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -73,33 +76,58 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>asdjnjln</td>
-                            <td>0012737</td>
-                            <td></td>
+                            <td>no</td>
+                            <td><?= $estimasi['keluhan']; ?></td>
+                            <td><?= $detail['jenis_servis']; ?></td>
+                            <td><?= $detail['nama_part']; ?></td>
+                            <td><?= $estimasi['estimasi_biaya']; ?></td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
                         <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>asdjnjln</td>
-                            <td>0012737</td>
-                            <td></td>
+                            <th>No</th>
+                            <th>Nama Part</th>
+                            <th>Keterangan Jasa</th>
+                            <th>Harga Jasa</th>
+                            <th>Total Harga</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>asdjnjln</td>
-                            <td>0012737</td>
-                            <td></td>
+                            <td>no</td>
+                            <td><?= $estimasi['keluhan']; ?></td>
+                            <td><?= $detail['jenis_servis']; ?></td>
+                            <td><?= $detail['nama_part']; ?></td>
+                            <td><?= $estimasi['estimasi_biaya']; ?></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         </p>
+        <div class="row mb-5 text-center">
+            <div class="col">
+                Nama Pemilik
+            </div>
+            <div class="col">
+                Nama Pegawai
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                (Nama Pemilik)
+            </div>
+            <div class="col">
+                (Nama Pegawai)
+            </div>
+        </div>
     </div>
-
     <!-- Script JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous">

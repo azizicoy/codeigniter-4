@@ -7,16 +7,26 @@
                 <div class="card-header">
                     <h3 class="text-center font-weight-light my-4">Login</h3>
                 </div>
-                <form class="card-body" action="/auth/authenticate" method="POST">
+                <form class="card-body" action="/auth/validasi" method="POST">
                     <?= session()->getFlashdata('error'); ?>
+                    <!-- Input Username -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="username_or_email" name="username_or_email" type="text"
-                            autocomplete="none" />
-                        <label for="username_or_email">Username or E-mail</label>
+                        <input class="form-control <?= isset($validation['error_username']) ? 'is-invalid' : ''; ?>"
+                            id="username" name="username" type="text" autocomplete="none" />
+                        <label for="username">Username</label>
+                        <!-- error -->
+                        <div id="validationServer03Feedback" class="invalid-feedback">
+                            <?= $validation['error_username'] ?? ''; ?>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="password" name="password" type="password" />
+                        <input class="form-control <?= isset($validation['error_password']) ? 'is-invalid' : ''; ?>"
+                            id="password" name="password" type="password" />
                         <label for="password">Password</label>
+                        <!-- error -->
+                        <div id="validationServer03Feedback" class="invalid-feedback">
+                            <?= $validation['error_password'] ?? ''; ?>
+                        </div>
                     </div>
                     <div class="row mx-auto"><button type="submit" class="btn btn-primary">Submit</button></div>
                 </form>

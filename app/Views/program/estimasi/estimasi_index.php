@@ -34,7 +34,7 @@
                                 <th>Tanggal Estimasi</th>
                                 <th>Keluhan</th>
                                 <th>Estimasi Biaya</th>
-                                <th>Aksi</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,9 @@
                                 <td><?= $e['keluhan']; ?></td>
                                 <td><?= $e['estimasi_biaya']; ?></td>
                                 <td class="text-center"><a href="/estimasi/<?= $e['id_estimasi']; ?>"
-                                        class="btn btn-success"><i class="bi bi-pencil"></i> Detail</a>
+                                        class="btn btn-success"><i class="bi bi-info-circle"></i> Detail</a>
+                                    <a href="/estimasi/prev/<?= $e['id_estimasi']; ?>" class="btn btn-warning"><i
+                                            class="bi bi-printer"></i> Print</a>
                                 </td>
                             </tr>
                             <?php endforeach ?>
@@ -73,7 +75,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+            <div class="text-muted">Copyright &copy; Your Website <?= date('Y'); ?></div>
         </div>
     </div>
 </footer>
@@ -84,6 +86,36 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
 <script src="/assets/js/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#dataTable').DataTable({
+        "columnDefs": [{
+            "targets": 0,
+            "orderable": false,
+            "searchable": false,
+        }],
+        "order": [
+            [1, "asc"]
+        ], // Mengurutkan berdasarkan kolom kedua (nama_pemilik) secara ascending
+        "drawCallback": function(settings) {
+            var api = this.api();
+            var rows = api.rows({
+                page: 'current'
+            }).nodes();
+            var start = api.page.info().start;
+
+            // Atur nomor urutan
+            api.column(0, {
+                page: 'current'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = start + i + 1;
+            });
+        }
+    });
+});
+</script>
 <script src="/assets/js/scripts.js"></script>
 <script src="/assets/js/datatables-simple-demo.js"></script>
 <?= $this->endSection(); ?>

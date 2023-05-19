@@ -38,9 +38,9 @@
                     <div class="form-group row mb-2">
                         <label for="nama_pemilik" class="col-md-3 col-form-label"><strong>Nama Pemilik</strong></label>
                         <div class="col">
-                            <select class="form-select" id="id_pemilik" name="id_pemilik"
-                                aria-label="Default select example">
-                                <option selected>pilih salah satu</option>
+                            <select class="form-select <?= isset($validation['nama_pemilik']) ? 'is-invalid' : null; ?>"
+                                id="nama_pemilik" name="nama_pemilik" aria-label="Default select example">
+                                <option selected value="">pilih salah satu</option>
                                 <?php foreach ($pemilik as $p): ?>
                                 <option value="<?= $p['id_pemilik']; ?>"><?= $p['nama_pemilik']; ?></option>
                                 <?php endforeach ?>
@@ -58,9 +58,9 @@
                                 Kendaraan</strong></label>
                         <div class="col">
                             <select
-                                class="form-select <?= isset($validation['jenis_kendaraan']) ? 'is-invalid' : ''; ?>"
+                                class="form-select <?= isset($validation['jenis_kendaraan']) ? 'is-invalid' : null; ?>"
                                 id="jenis_kendaraan" name="jenis_kendaraan" aria-label="Default select example">
-                                <option selected>Pilih Jenis Kendaraan</option>
+                                <option selected value="">Pilih Jenis Kendaraan</option>
                                 <option value="APV">APV</option>
                                 <option value="Baleno">Baleno</option>
                                 <option value="Carry">Carry</option>
@@ -72,7 +72,7 @@
                                 <option value="Swift">Swift</option>
                                 <option value="SX4">SX4</option>
                             </select>
-                            <div id="jenis_kendaraan" class="invalid-feedback">
+                            <div class="invalid-feedback">
                                 <?= $validation['jenis_kendaraan'] ?? ''; ?>
                             </div>
                         </div>

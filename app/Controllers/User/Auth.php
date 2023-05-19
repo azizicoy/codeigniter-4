@@ -19,49 +19,46 @@ class Auth extends BaseController
     public function index()
     {
         $data = [
-            'data' => 'Halaman Login | Program'
+            'data' => 'Halaman Login | Program',
+            'validation' => session('validation'),
         ];
 
         return view('program/auth/login', $data);
     }
 
-    public function authenticate()
+    public function validasi()
     {
-        // Ambil informasi username atau email dan password dari form login
-        $usernameOrEmail = $this->request->getVar('username_or_email');
+        $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
 
-        // Cari user berdasarkan username atau email yang dimasukkan
-        $user = $this->userModel->where('username', $usernameOrEmail)
-                          ->orWhere('e_mail', $usernameOrEmail)
-                          ->first();
+        $validasi = \Config\Services::validation();
 
-        // Jika user ditemukan, verifikasi password
-        if ($user && password_verify($password, $this->userModel['password'])) {
-            // Ambil data user dan pegawai terkait dengan user yang sedang login
-            $user = $this->userModel->getWithPegawai($this->userModel['id']);
-
-            // Simpan data user dan pegawai ke dalam session
-            $session = session();
-            $sessionData = [
-                'id' => $this->userModel['id'],
-                'username' => $this->userModel['username'],
-                'role' => $this->userModel['role'],
-                'id_pegawai' => [
-                    'id_pegawai' => $this->pegawaiModel['id_pegawai'],
-                    'nama_pegawai' => $this->pegawaiModel['nama_pegawai']
+        // Rules Validasi
+        $valid = $this->validate([
+            'username' => [
+                'rules' => 'required',
+                'errors' =>[
+                    'required' => 'Username harus diisi'                
+                    ]
+                        ],
+            'password' => [
+                'rules' => 'required',
+                'errors' =>[
+                    'required' => 'Password harus diisi'
                 ]
+            ]]);
+        if (!$valid){
+            $session_error = [
+                'error_username'=> $validasi->getError('username'),
+                'error_password'=> $validasi->getError('password')
             ];
-            $session->set($sessionData);
 
-            // Redirect ke halaman dashboard
-            return redirect()->to('/');
-        } else {
-            // Tampilkan pesan error dan redirect kembali ke halaman login
-            session()->setFlashdata('error', 'Username atau password salah.');
-            return redirect()->back();
+            session()->setFlashdata($session_error);
+
+            return redirect()->back()->withInput();
         }
     }
+   
 
     public function logout()
     {

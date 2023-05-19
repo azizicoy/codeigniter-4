@@ -9,6 +9,7 @@ use App\Models\ServisModel;
 use App\Models\EstimasiModel;
 use App\Models\PemilikModel;
 use App\Models\DetailEstimasiModel;
+use Dompdf\Dompdf;
 
 use App\Controllers\BaseController;
 
@@ -56,8 +57,45 @@ class Estimasi extends BaseController
         if (empty($data['estimasi'])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Nama Estimasi Tidak Ada');
         }
-
+        
         return view('program/estimasi/estimasi_detail', $data);
+    }
+
+    // Print ke dalam tabel
+    public function prev($slug)
+    {
+        $data = [
+            'judul'     => 'Halaman Print Preview | Program',
+            'utama'     => 'Print',
+            'estimasi'  => $this->estimasiModel->getEstimasi($slug),
+            'detail'    => $this->detailEstimasiModel->getDetail($slug),
+        ];
+        
+        if (empty($data['estimasi'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Nama Estimasi Tidak Ada');
+        }
+        
+        return view('program/estimasi/estimasi_print', $data);
+    }
+    public function print()
+    {
+        $dompdf = new Dompdf();
+        
+        // Ambil data berdasarkan id estimasi dan detail
+         
+        $html = view('program/estimasi/estimasi_print'); 
+        
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+        // load
+        $dompdf->loadHtml($html);
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream('data.pdf', array('Attachment' => false));
     }
     public function input()
     {
@@ -74,7 +112,7 @@ class Estimasi extends BaseController
 
         return view('program/estimasi/estimasi_input', $data);
     }
-
+    
     public function save()
     {
         helper('form');
@@ -84,6 +122,7 @@ class Estimasi extends BaseController
     
         // Hitung subtotal
         $subtotal = $hargaServis + ($hargaSpart * $jumlah);
+
     
         // Insert data yang diambil dari View estimasi_input
         $data = [
@@ -127,14 +166,24 @@ class Estimasi extends BaseController
 
         return redirect()->to('/program/estimasi/index');
     }
-    public function print()
+    
+
+
+    // ================================DELETE ESTIMASI================================
+    public function delete($id)
+    {
+        $this->estimasiModel->delete($id);
+        session()->setFlashdata('pesan', 'Data Berhasil Dihapus!');
+        return redirect()->to('/program/estimasi/index');
+    }
+
+    // contoh print
+    public function contoh()
     {
         $data = [
-            'judul' => 'Estimasi Biaya | Program',
-            'utama'       => 'Estimasi',
-            'estimasi' => $this->estimasiModel->getEstimasi()
+            'estimasi' => $this->estimasiModel->getEstimasi(),
+            'detail' => $this->detailEstimasiModel->getDetail(),
         ];
-
         return view('program/estimasi/estimasi_print', $data);
     }
 

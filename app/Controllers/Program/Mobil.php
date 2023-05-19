@@ -73,7 +73,7 @@ class Mobil extends BaseController
                 'is_unique' => 'Nomor Polisi sudah terdaftar' 
             ]
         ],
-        'id_pemilik' => 
+        'nama_pemilik' => 
         [
             'rules' => 'required|is_unique[tb_mobil.id_pemilik]',
             'errors' =>[

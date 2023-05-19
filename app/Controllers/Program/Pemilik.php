@@ -46,7 +46,7 @@ class Pemilik extends BaseController
         return view('program/pemilik/pemilik_detail', $data);
     }
 
-
+    // =================================INPUT=======================================
     public function input()
     {
         helper('form');
@@ -57,7 +57,7 @@ class Pemilik extends BaseController
         ];
         return view('program/pemilik/pemilik_input', $data);
     }
-
+    // =====================================SAVE===========================================
     public function save()
     {
         // Rules Validasi
@@ -112,6 +112,7 @@ class Pemilik extends BaseController
 
         return redirect()->to('/program/pemilik/index');
     }
+    // =======================================EDIT=============================================
     public function edit($id)
     {
         helper('form');
@@ -123,7 +124,7 @@ class Pemilik extends BaseController
         ];
         return view('program/pemilik/pemilik_edit', $data);
     }
-    // update
+    // =======================UPDATE==================================================
     public function update($id) 
     {
          
@@ -203,7 +204,8 @@ class Pemilik extends BaseController
 
         return redirect()->to('/program/pemilik/index');
     }
-    // Delete
+
+    // ====================================DELETE===============================
     public function delete($id)
     {
         $this->pemilikModel->delete($id);

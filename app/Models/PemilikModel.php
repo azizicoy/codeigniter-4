@@ -30,7 +30,7 @@ class PemilikModel extends Model
         $builder = $db->table('tb_pemilik');
         if ($id == false) 
         {
-            return $builder->orderBy('nama_pemilik ASC')->get()->getResultArray();
+            return $builder->get()->getResultArray();
         }
 
         return $this->where(['id_pemilik' => $id])->first();

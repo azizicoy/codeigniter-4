@@ -69,7 +69,8 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <a href="/pegawai/edit/<?= $pegawai['id_pegawai']; ?>" class="btn btn-success">Edit</a>
+                            <a href="/pegawai/edit/<?= $pegawai['id_pegawai']; ?>" class="btn btn-success"><i
+                                    class="bi bi-pencil"></i> Edit</a>
                             <form action="/program/pegawai/delete/<?= $pegawai['id_pegawai']; ?>" method="post"
                                 class="d-inline">
                                 <?= csrf_field(); ?>

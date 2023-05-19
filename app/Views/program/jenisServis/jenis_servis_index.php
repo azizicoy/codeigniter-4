@@ -42,7 +42,7 @@
                                 <td><?= $s['jenis_servis']; ?></td>
                                 <td><?= $s['harga_jasa_servis']; ?></td>
                                 <td class="text-center"><a href="/servis/<?= $s['id_jenis_servis']; ?>"
-                                        class="btn btn-success">Detail</a>
+                                        class="btn btn-success"><i class="bi bi-info-circle"></i> Detail</a>
                                 </td>
                             </tr>
                             <?php endforeach?>

@@ -46,7 +46,7 @@
                                 <td><?= $p['jenis_kendaraan']; ?></td>
                                 <td><?= $p['merk']; ?></td>
                                 <td class="text-center"><a href="/mobil/<?= $p['id_mobil']; ?>"
-                                        class="btn btn-success">Detail</a>
+                                        class="btn btn-success"><i class="bi bi-info-circle"></i> Detail</a>
                                 </td>
                             </tr>
                             <?php endforeach?>
