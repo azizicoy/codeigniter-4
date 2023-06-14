@@ -8,15 +8,19 @@ class UserModel extends Model
 {
     protected $table            = 'tb_user';
     protected $primaryKey       = 'id';
-    protected $allowedFields    = ['username', 'e_mail', 'password', 'role'];
+    protected $allowedFields    = ['username', 'e_mail', 'password'];
 
-    public function getLogin($username, $password)
+    protected function hashPassword(array $data)
     {
-        return $this->db->table('tb_user')->where([
-            'username' => $username,
-            'password' => $password,
-        ])->get()->getRowArray();
+        if (isset($data['data']['password'])) {
+            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+        }
+        return $data;
     }
 
+    public function login($username)
+    {
+     return $this->db->table('tb_user')->where(array('username' => $username))->get()->getRowArray();
+    }
 
 }

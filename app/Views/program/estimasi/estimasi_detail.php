@@ -7,7 +7,7 @@
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Estimasi</li>
+        <li class="breadcrumb-item active"><a href="/estimasi">Estimasi</a></li>
         <li class="breadcrumb-item active">Form Detail Estimasi</li>
     </ol>
     <div class="row">
@@ -18,7 +18,6 @@
                         <h5 class="col-md-10 text-center">
                             Detail Data Estimasi
                         </h5>
-                        <a href="/pdf/print" class="col btn btn-warning">Cetak</a>
                     </div>
                 </div>
                 <!-- Form Detail -->
@@ -83,8 +82,9 @@
                     <div class="form-group row mb-2">
                         <label for="harga_jasa_servis" class="col-md-3 col-form-label">Harga Perbaikan</label>
                         <div class="col">
-                            <input type="number" id="harga_jasa_servis" name="harga_jasa_servis" class="form-control"
-                                value="<?= $detail['harga_jasa_servis']; ?>" disabled autofocus>
+                            <input type="text" id="harga_jasa_servis" name="harga_jasa_servis" class="form-control"
+                                value="<?= 'Rp. ' . number_format($detail['harga_jasa_servis'], 0, ',', '.'); ?>"
+                                disabled autofocus>
                         </div>
                     </div>
                     <!-- Input Spare Part-->
@@ -95,20 +95,30 @@
                                 value="<?= $detail['nama_part']; ?>" disabled autofocus>
                         </div>
                     </div>
+                    <!-- Jumlah spare part -->
+                    <div class="form-group row mb-2">
+                        <label for="jumlah" class="col-md-3 col-form-label">Jumlah Spare Part</label>
+                        <div class="col">
+                            <input type="text" id="jumlah" name="jumlah" class="form-control"
+                                value="<?= $detail['jumlah']; ?>" disabled autofocus>
+                        </div>
+                    </div>
                     <!-- total Harga Part-->
                     <div class="form-group row mb-2">
                         <label for="harga" class="col-md-3 col-form-label">Harga Spare Part</label>
                         <div class="col">
-                            <input type="number" id="harga" name="harga" class="form-control"
-                                value="<?= $detail['harga']; ?>" disabled autofocus>
+                            <input type="text" id="harga" name="harga" class="form-control"
+                                value="<?= 'Rp. ' . number_format($detail['harga'], 0, ',', '.'); ?>" disabled
+                                autofocus>
                         </div>
                     </div>
                     <!-- Subtotal-->
                     <div class="form-group row mb-2">
                         <label for="subtotal" class="col-md-3 col-form-label">Subtotal</label>
                         <div class="col">
-                            <input type="number" id="subtotal" name="subtotal" class="form-control"
-                                value="<?= $detail['subtotal']; ?>" disabled autofocus>
+                            <input type="text" id="subtotal" name="subtotal" class="form-control"
+                                value="<?= 'Rp. ' . number_format($detail['subtotal'], 0, ',', '.'); ?>" disabled
+                                autofocus>
                         </div>
                     </div>
                     <!-- Delete, Edit dan Kembali -->
@@ -123,7 +133,6 @@
                                 <button type="submit" class="btn btn-danger"
                                     onclick="return confirm('Apakah Yaking Ingin Menghapus data?')">Hapus</button>
                             </form>
-                            <a href="/pdf/print/<?= $estimasi['id_estimasi']; ?>" class="btn btn-warning">Export PDF</a>
                         </div>
                         <div class="col text-end">
                             <a href="/estimasi">Kembali Ke Halaman Utama</a>

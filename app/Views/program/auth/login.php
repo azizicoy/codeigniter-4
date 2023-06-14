@@ -7,31 +7,41 @@
                 <div class="card-header">
                     <h3 class="text-center font-weight-light my-4">Login</h3>
                 </div>
-                <form class="card-body" action="/auth/validasi" method="POST">
-                    <?= session()->getFlashdata('error'); ?>
+                <form class="card-body" action="/login/process" method="POST">
+                    <?php if (!empty(session()->getFlashdata('error'))) { ?>
+                    <div class="alert alert-danger">
+                        <?php echo session()->getFlashdata('error') ?>
+                    </div>
+                    <?php } ?>
+                    <?php if(session()->getFlashdata('pesan')): ?>
+                    <div class="alert alert-success">
+                        <?= session()->getFlashdata('pesan'); ?>
+                    </div>
+                    <?php endif; ?>
                     <!-- Input Username -->
-                    <div class="form-floating mb-3">
-                        <input class="form-control <?= isset($validation['error_username']) ? 'is-invalid' : ''; ?>"
-                            id="username" name="username" type="text" autocomplete="none" />
-                        <label for="username">Username</label>
-                        <!-- error -->
-                        <div id="validationServer03Feedback" class="invalid-feedback">
-                            <?= $validation['error_username'] ?? ''; ?>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-floating mb-3 mb-md-0">
+                                <input class="form-control" id="username" name="username" type="text"
+                                    placeholder="Masukkan Username" autocomplete="off" />
+                                <label for="inputFirstName">Username</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control <?= isset($validation['error_password']) ? 'is-invalid' : ''; ?>"
-                            id="password" name="password" type="password" />
-                        <label for="password">Password</label>
-                        <!-- error -->
-                        <div id="validationServer03Feedback" class="invalid-feedback">
-                            <?= $validation['error_password'] ?? ''; ?>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-floating mb-3 mb-md-0">
+                                <input class="form-control" id="password" name="password" type="password"
+                                    placeholder="Masukkan Password" autocomplete="none" />
+                                <label for="inputFirstName">Password</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mx-auto"><button type="submit" class="btn btn-primary">Submit</button></div>
+                    <div class="row mx-auto"><button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </form>
                 <div class="card-footer text-center py-3">
-                    <div class="small"><a href="">Registrasi Akun</a></div>
+                    <div class="small"><a href="/register">Registrasi Akun</a></div>
                 </div>
             </div>
         </div>

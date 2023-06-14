@@ -30,11 +30,14 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'User\Auth::index');
+$routes->get('/', 'User\Auth::login');
+$routes->get('/program', 'Program\Program::index', ['filter' => 'App\Filters\LoginFilter']);
+$routes->post('/login/process', 'User\Auth::processLogin');
+$routes->get('/register', 'User\Auth::register');
+$routes->post('/register/validation', 'User\Auth::validation');
+$routes->get('/logout', 'User\Auth::logout');
 
-$routes->post('/auth/validasi', 'User\Auth::validasi');
-
-$routes->get('/profile', 'User\Register::index');
+$routes->post('/auth/login', 'User\Auth::login');
 
 $routes->get('/program', 'Program\Program::index'); // ROUTES KE HOME INDEX PROGRAM
 
@@ -50,7 +53,8 @@ $routes->get('/pegawai/(:any)', 'Program\Pegawai::detail/$1'); // ROUTES KE CONT
 
 $routes->get('/estimasi', 'Program\Estimasi::index'); // ROUTES KE CONTROLLER ESTIMASI
 $routes->get('/estimasi/edit/(:segment)', 'Program\Estimasi::edit/$1'); // ROUTES KE CONTROLLER EDIT
-$routes->get('/estimasi/prev/(:any)', 'Program\Estimasi::prev/$1'); // ROUTES KE CONTROLLER ESTIMASI PRINT
+// $routes->get('/estimasi/prev/(:any)', 'Program\Estimasi::prev/$1'); // ROUTES KE CONTROLLER ESTIMASI PRINT
+$routes->get('/estimasi/print/(:any)', 'Program\Estimasi::print/$1'); // ROUTES KE CONTROLLER ESTIMASI PRINT
 $routes->delete('/program/estimasi/(:num)', 'Program\Estimasi::delete/$1'); // ROUTES KE CONTROLLER DELETE
 $routes->get('/estimasi/(:any)', 'Program\Estimasi::detail/$1'); // ROUTES KE CONTROLLER ESTIMASI
 
@@ -62,12 +66,12 @@ $routes->get('/mobil/(:any)', 'Program\Mobil::detail/$1'); // ROUTES KE CONTROLL
 $routes->get('/part', 'Program\Part::index'); // ROUTES KE CONTROLLER PART
 
 $routes->get('/penjadwalan', 'Program\Penjadwalan::index'); // ROUTES KE CONTROLLER PENJADWALAN
+$routes->get('/penjadwalan/penjadwalan_input', 'Program\Penjadwalan::input'); // ROUTES KE CONTROLLER PENJADWALAN Input
+$routes->get('/penjadwalan/edit/(:segment)', 'Program\Penjadwalan::edit/$1'); // ROUTES KE CONTROLLER EDIT
+$routes->delete('/program/penjadwalan/(:num)', 'Program\Penjadwalan::delete/$1'); // ROUTES KE CONTROLLER PEMILIK
 
 $routes->get('/servis', 'Program\Servis::index'); // ROUTES KE CONTROLLER JENIS SERVIS
 
-
-
-$routes->get('/estimasi-print', 'Program\Estimasi::contoh/'); // ROUTES KE CONTROLLER ESTIMASI PRINT
 
 // $routes->get('/', 'Pemilik::index');
 /*

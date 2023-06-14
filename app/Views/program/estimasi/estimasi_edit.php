@@ -7,8 +7,8 @@
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Estimasi</li>
-        <li class="breadcrumb-item active">Form Input Estimasi</li>
+        <li class="breadcrumb-item active"><a href="/estimasi">Estimasi</a></li>
+        <li class="breadcrumb-item active">Form Edit Estimasi</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
@@ -19,7 +19,8 @@
                     </h5>
                 </div>
                 <?= helper('form'); ?>
-                <form class="card-body" action="/program/estimasi/save" method="POST">
+                <form class="card-body" action="/program/estimasi/update/<?= $estimasi['id_estimasi']; ?>"
+                    method="POST">
                     <?= csrf_field(); ?>
                     <!-- Input Nama Pemilik -->
                     <div class="form-group row mb-2">
@@ -75,7 +76,8 @@
                         <div class="col">
                             <input type="text"
                                 class="form-control <?= isset($validation['kode_estimasi']) ? 'is-invalid' : ''; ?>"
-                                id="kode_estimasi" name="kode_estimasi" value="<?= old('kode_estimasi');?>">
+                                id="kode_estimasi" name="kode_estimasi"
+                                value="<?= old('kode_estimasi', $estimasi['kode_estimasi']); ?>">
                             <!-- error -->
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 <?= $validation['kode_estimasi'] ?? ''; ?>
@@ -88,7 +90,8 @@
                         <div class="col">
                             <input type="datetime-local"
                                 class="form-control <?= isset($validation['tgl_estimasi']) ? 'is-invalid' : ''; ?>"
-                                value="<?= old('tgl_estimasi');?>" id="tgl_estimasi" name="tgl_estimasi">
+                                value="<?= old('tgl_estimasi', $estimasi['tgl_estimasi']); ?>" id="tgl_estimasi"
+                                name="tgl_estimasi">
                             <!-- error -->
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 <?= $validation['tgl_estimasi'] ?? ''; ?>
@@ -100,7 +103,8 @@
                         <label for="keluhan" class="col-md-3 col-form-label">Keluhan</label>
                         <div class="col">
                             <textarea class="form-control <?= isset($validation['keluhan']) ? 'is-invalid' : ''; ?>"
-                                id="keluhan" name="keluhan" rows="3"><?= old('keluhan');?></textarea>
+                                id="keluhan" name="keluhan"
+                                rows="3"><?= old('keluhan', $estimasi['keluhan']); ?></textarea>
                             <!-- error -->
                             <div id="validationServer03Feedback" class="invalid-feedback">
                                 <?= $validation['keluhan'] ?? ''; ?>

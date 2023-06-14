@@ -13,8 +13,14 @@ class ServisModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = ['jenis_servis', 'harga_jasa_servis'];
 
-    public function getServis()
+    public function getServis($slug = false)
     {
-        return $this->findAll();
+        if ($slug == false) 
+        {
+            return $this->findAll();
+        }
+
+        return $this->where(['id_jenis_servis' => $slug])->first();
     }
+
 }

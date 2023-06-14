@@ -2,7 +2,7 @@
 
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4"><?= $utama; ?></h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard
@@ -83,9 +83,28 @@
 <script>
 $(document).ready(function() {
     $('#dataTable').DataTable({
+        "columnDefs": [{
+            "targets": 0,
+            "orderable": false,
+            "searchable": false,
+        }],
         "order": [
-            [0, "asc"]
-        ]
+            [1, "asc"]
+        ], // Mengurutkan berdasarkan kolom kedua (nama_pemilik) secara ascending
+        "drawCallback": function(settings) {
+            var api = this.api();
+            var rows = api.rows({
+                page: 'current'
+            }).nodes();
+            var start = api.page.info().start;
+
+            // Atur nomor urutan
+            api.column(0, {
+                page: 'current'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = start + i + 1;
+            });
+        }
     });
 });
 </script>

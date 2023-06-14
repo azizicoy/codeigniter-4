@@ -20,12 +20,4 @@ class MobilModel extends Model
 
         return $this->where(['id_mobil' => $slug])->first();
     }
-
- 
-    
-    public function getAutoComplete($keyword){
-        $query = $this->select('id_pemilik', 'nama_pemilik')->like('nama_pemilik', $keyword);
-
-        return $query->get()->getResultArray();
-    }
 }

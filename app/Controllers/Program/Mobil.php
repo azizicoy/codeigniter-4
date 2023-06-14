@@ -134,7 +134,7 @@ class Mobil extends BaseController
         $mo = $this->mobilModel->save
         ([
             'nopol' => $this->request->getVar('nopol'),
-            'id_pemilik' => $this->request->getVar('id_pemilik'),
+            'id_pemilik' => $this->request->getVar('nama_pemilik'),
             'jenis_kendaraan' => $this->request->getVar('jenis_kendaraan'),
             'no_chasis' => $this->request->getVar('no_chasis'),
             'no_mesin' => $this->request->getVar('no_mesin'),

@@ -2,7 +2,7 @@
 
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Dashboard</h1>
+    <h1 class="mt-4"><?= $utama; ?></h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard
@@ -13,18 +13,17 @@
     <!-- CARD HOME -->
     <div class="row">
         <div class="col">
-            <?php if(session()->getFlashdata('pesan')): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong><?= session()->getFlashdata('pesan'); ?></strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <?php endif; ?>
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="align-center">Estimasi Perbaikan</h5>
                     <a href="/program/estimasi/input" class="btn btn-primary">Input Data</a>
                 </div>
                 <div class="card-body">
+                    <?php if(session()->getFlashdata('pesan')): ?>
+                    <div class="alert alert-success">
+                        <?= session()->getFlashdata('pesan'); ?>
+                    </div>
+                    <?php endif; ?>
                     <table id="dataTable" class="table table-striped" style="width:100%">
                         <thead class="bg-info">
                             <tr>
@@ -45,10 +44,10 @@
                                 <td><?= $e['nopol']; ?></td>
                                 <td><?= $e['tgl_estimasi']; ?></td>
                                 <td><?= $e['keluhan']; ?></td>
-                                <td><?= $e['estimasi_biaya']; ?></td>
+                                <td><?= 'Rp. '. number_format($e['estimasi_biaya'], 0, ',', '.'); ?></td>
                                 <td class="text-center"><a href="/estimasi/<?= $e['id_estimasi']; ?>"
                                         class="btn btn-success"><i class="bi bi-info-circle"></i> Detail</a>
-                                    <a href="/estimasi/prev/<?= $e['id_estimasi']; ?>" class="btn btn-warning"><i
+                                    <a href="/estimasi/print/<?= $e['id_estimasi']; ?>" class="btn btn-warning"><i
                                             class="bi bi-printer"></i> Print</a>
                                 </td>
                             </tr>
