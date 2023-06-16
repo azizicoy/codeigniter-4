@@ -29,7 +29,7 @@
                                 id="id_estimasi" name="id_estimasi">
                                 <option selected value="">Kode Estimasi</option>
                                 <?php foreach($estimasi as $e): ?>
-                                <option value="<?= $e['id_estimasi']; ?>"><?= $e['kode_estimasi']; ?></option>
+                                <option value="<?= $e['id_estimasi']; ?>"><?= $e['id_estimasi']; ?></option>
                                 <?php endforeach ?>
                             </select>
                             <!-- error -->

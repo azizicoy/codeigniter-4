@@ -9,6 +9,8 @@ use App\Models\ServisModel;
 use App\Models\EstimasiModel;
 use App\Models\PemilikModel;
 use App\Models\DetailEstimasiModel;
+use CodeIgniter\I18n\Time;
+
 use Dompdf\Dompdf;
 
 use App\Controllers\BaseController;
@@ -39,7 +41,8 @@ class Estimasi extends BaseController
             'judul'         => 'Estimasi Biaya | Program',
             'utama'         => 'Estimasi',
             'estimasi'      => $this->estimasiModel->getEstimasi(),
-            'validation'    => session('validation')
+            'validation'    => session('validation'),
+            'time'          => time()
         ];
 // dd($data);
         return view('program/estimasi/estimasi_index', $data);

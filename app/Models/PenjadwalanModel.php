@@ -8,7 +8,7 @@ class PenjadwalanModel extends Model
 {
     protected $table            = 'tb_penjadwalan';
     protected $primaryKey       = 'id_penjadwalan';
-    protected $allowedFields    = ['id_estimasi, kode_penjadwalan', 'tgl_dimulai', 'tgl_selesai'];
+    protected $allowedFields    = ['id_estimasi', 'kode_penjadwalan', 'tgl_dimulai', 'tgl_selesai'];
 
     public function getPenjadwalan($slug = false)
     {

@@ -84,14 +84,13 @@ class Penjadwalan extends BaseController
          }
  
          // Insert Data
-         $data = [
+         $data = $this->penjadwalanModel->save([
             'id_estimasi' => $this->request->getVar('id_estimasi'),
             'kode_penjadwalan' => $this->request->getVar('kode_penjadwalan'),
             'tgl_dimulai' => $this->request->getVar('tgl_dimulai'),
             'tgl_selesai' => $this->request->getVar('tgl_selesai'),
-         ];
-        //  dd($data);
-         $this->penjadwalanModel->save($data);
+         ]);
+         dd($data);
          
          session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan!');
  
