@@ -2,71 +2,92 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Edit Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Pemilik</li>
-        <li class="breadcrumb-item active">Form Input Pemilik</li>
+        <li class="breadcrumb-item active"><a href="/penjadwalan">Penjadwalan</a></li>
+        <li class="breadcrumb-item active">Form Edit Penjadwalan</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="text-center">
-                        Input Data Pelanggan
+                        Edit Data Penjadwalan
                     </h5>
                 </div>
                 <?= helper('form'); ?>
-                <form class="card-body" action="/program/pemilik/update/<?= $pemilik['id_pemilik']; ?>" method="POST">
+                <form class="card-body" action="/program/penjadwalan/update/<?= $penjadwalan['id_penjadwalan']; ?>"
+                    method="POST">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="id_pemilik" value="<?= old('id_pemilik', $pemilik['id_pemilik']); ?>">
-                    <!-- Input Nama -->
+                    <input type="hidden" name="id_penjadwalan"
+                        value="<?= old('id_penjadwalan', $penjadwalan['id_penjadwalan']); ?>">
+
+                    <!-- Input Kode Estimasi -->
                     <div class="form-group row mb-2">
-                        <label for="nama_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
+                        <label for="id_estimasi" class="col-md-3 col-form-label">Kode Estimasi</label>
+                        <div class="col">
+                            <select class="form-select <?= isset($validation['id_estimasi']) ? 'is-invalid' : ''; ?>"
+                                id="id_estimasi" name="id_estimasi" aria-label="Default select example">
+                                <option selected disabled>Pilih
+                                    salah satu</option>
+                                <?php foreach ($estimasi as $e): ?>
+                                <option value="<?= $e['id_estimasi']; ?>"
+                                    <?= old('id_estimasi', $penjadwalan['id_estimasi']) == $e['id_estimasi'] ? 'selected' : ''; ?>>
+                                    <?= $e['kode_estimasi']; ?>
+                                </option>
+                                <?php endforeach ?>
+                            </select>
+                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                <?= $validation['id_estimasi'] ?? ''; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Kode Penjadwalan -->
+                    <div class="form-group row mb-2">
+                        <label for="kode_penjadwalan" class="col-md-3 col-form-label">Kode Penjadwalan</label>
                         <div class="col">
                             <input type="text"
-                                class="form-control <?= isset($validation['nama_pemilik']) ? 'is-invalid' : ''; ?>"
-                                value="<?= old('nama_pemilik', $pemilik['nama_pemilik']); ?>" id="nama_pemilik"
-                                name="nama_pemilik" autocomplete="off" autofocus>
+                                class="form-control <?= isset($validation['kode_penjadwalan']) ? 'is-invalid' : ''; ?>"
+                                value="<?= old('kode_penjadwalan', $penjadwalan['kode_penjadwalan']); ?>"
+                                id="kode_penjadwalan" name="kode_penjadwalan" autocomplete="off" autofocus>
                             <!-- error -->
                             <div id="validationServer03Feedback" class="invalid-feedback">
-                                <?= $validation['nama_pemilik'] ?? ''; ?>
+                                <?= $validation['kode_penjadwalan'] ?? ''; ?>
                             </div>
                         </div>
                     </div>
-                    <!-- Input E-Mail -->
+
+                    <!-- =========================Input Tanggal Dimulai============================================ -->
                     <div class="form-group row mb-2">
-                        <label for="e_mail" class="col-md-3 col-form-label">E-Mail</label>
+                        <label for="tgl_dimulai" class="col-md-3 col-form-label">Tanggal Dimulai</label>
                         <div class="col">
-                            <input type="email" id="e_mail" name="e_mail"
-                                class="form-control <?= isset($validation['e_mail']) ? 'is-invalid' : ''; ?>"
-                                value="<?= old('e_mail', $pemilik['e_mail']); ?>" autocomplete="off">
-                            <div id="e_mail" class="invalid-feedback">
-                                <?= $validation['e_mail'] ?? ''; ?>
+                            <input type="datetime-local"
+                                class="form-control <?= isset($validation['tgl_dimulai']) ? 'is-invalid' : ''; ?>"
+                                value="<?= old('tgl_dimulai', $penjadwalan['tgl_dimulai']);?>" id="tgl_dimulai"
+                                name="tgl_dimulai">
+                            <!-- error -->
+                            <div id="invalid" class="invalid-feedback">
+                                <?= $validation['tgl_dimulai'] ?? ''; ?>
                             </div>
                         </div>
                     </div>
-                    <!-- Input No. Telp -->
+
+                    <!-- =========================Input Tanggal selesai============================================ -->
                     <div class="form-group row mb-2">
-                        <label for="no_telp" class="col-md-3 col-form-label">Nomor Telepon</label>
+                        <label for="tgl_selesai" class="col-md-3 col-form-label">Tanggal Selesai</label>
                         <div class="col">
-                            <input type="tel" id="no_telp" name="no_telp"
-                                class="form-control <?= isset($validation['no_telp']) ? 'is-invalid' : ''; ?>"
-                                value="<?= old('no_telp', $pemilik['no_telp']); ?>" autocomplete="off">
-                            <div id="no_telp" class="invalid-feedback">
-                                <?= $validation['no_telp'] ?? ''; ?>
+                            <input type="datetime-local"
+                                class="form-control <?= isset($validation['tgl_selesai']) ? 'is-invalid' : ''; ?>"
+                                value="<?= old('tgl_selesai', $penjadwalan['tgl_selesai']);?>" id="tgl_selesai"
+                                name="tgl_selesai">
+                            <!-- error -->
+                            <div id="invalid" class="invalid-feedback">
+                                <?= $validation['tgl_selesai'] ?? ''; ?>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Input Alamat -->
-                    <div class="form-group row mb-2">
-                        <label for="alamat" class="col-md-3 col-form-label">Alamat</label>
-                        <div class="col">
-                            <textarea class="form-control <?= isset($validation['alamat']) ? 'is-invalid' : ''; ?>"
-                                id="alamat" name="alamat" cols="10" rows="10"
-                                autocomplete="off"><?= old('alamat', $pemilik['alamat']); ?></textarea>
                         </div>
                     </div>
                     <div class="row mx-auto" style="width: 100px;"><button type="submit"

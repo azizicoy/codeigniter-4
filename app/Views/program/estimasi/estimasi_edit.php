@@ -22,14 +22,20 @@
                 <form class="card-body" action="/program/estimasi/update/<?= $estimasi['id_estimasi']; ?>"
                     method="POST">
                     <?= csrf_field(); ?>
-                    <!-- Input Nama Pemilik -->
+                    <input type="hidden" name="id_estimasi"
+                        value="<?= old('id_estimasi', $estimasi['id_estimasi']); ?>">
+                    <!-- Edit Nama Pemilik -->
                     <div class="form-group row mb-2">
                         <label for="id_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
                         <div class="col">
-                            <select class="form-select" id="id_pemilik" name="id_pemilik">
-                                <option selected>Nama Pemilik</option>
+                            <select class="form-select <?= isset($validation['id_pemilik']) ? 'is-invalid' : ''; ?>"
+                                id="id_pemilik" name="id_pemilik">
+                                <option selected disabled>Nama Pemilik</option>
                                 <?php foreach($pemilik as $p): ?>
-                                <option value="<?= $p['id_pemilik']; ?>"><?= $p['nama_pemilik']; ?></option>
+                                <option value="<?= $p['id_pemilik']; ?>"
+                                    <?= old('id_pemilik', $estimasi['id_pemilik']) == $p['id_pemilik'] ? 'selected' : ''; ?>>
+                                    <?= $p['nama_pemilik']; ?>
+                                </option>
                                 <?php endforeach ?>
                             </select>
                             <!-- error -->
@@ -38,14 +44,17 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Input Kendaraan -->
+                    <!-- Edit Nopol -->
                     <div class="form-group row mb-2">
                         <label for="id_mobil" class="col-md-3 col-form-label">Nomor Polisi</label>
                         <div class="col">
                             <select class="form-select" id="id_mobil" name="id_mobil">
-                                <option selected>Nomor Polisi</option>
+                                <option selected disabled>Nomor Polisi</option>
                                 <?php foreach($mobil as $m): ?>
-                                <option value="<?= $m['id_mobil']; ?>"><?= $m['nopol']; ?></option>
+                                <option value="<?= $m['id_mobil']; ?>"
+                                    <?= old('id_mobil', $estimasi['id_mobil']) == $m['id_mobil'] ? 'selected' : ''; ?>>
+                                    <?= $m['nopol']; ?>
+                                </option>
                                 <?php endforeach ?>
                             </select>
                             <!-- error -->
@@ -54,15 +63,17 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Input Pegawai -->
+                    <!-- Edit Pegawai -->
                     <div class="form-group row mb-2">
                         <label for="id_pegawai" class="col-md-3 col-form-label">Nama Pegawai</label>
                         <div class="col">
                             <select class="form-select" id="id_pegawai" name="id_pegawai">
                                 <option selected>Nama Pegawai</option>
                                 <?php foreach($pegawai as $p): ?>
-                                <option value="<?= $p['id_pegawai']; ?>"><?= $p['nama_pegawai']; ?></option>
-                                <?php endforeach ?>
+                                <option value="<?= $p['id_pegawai']; ?>"
+                                    <?= old('id_pegawai', $estimasi['id_pegawai']) == $p['id_pegawai'] ? 'selected' : ''; ?>>
+                                    <?= $p['nama_pegawai']; ?>
+                                </option> <?php endforeach ?>
                             </select>
                             <!-- error -->
                             <div id="validationServer03Feedback" class="invalid-feedback">
@@ -70,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Input Kode Estimasi -->
+                    <!-- Edit Kode Estimasi -->
                     <div class="form-group row mb-2">
                         <label for="kode_estimasi" class="col-md-3 col-form-label">Kode Estimasi</label>
                         <div class="col">
@@ -84,7 +95,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Input Tanggal -->
+                    <!-- Edit Tanggal -->
                     <div class="form-group row mb-2">
                         <label for="tgl_estimasi" class="col-md-3 col-form-label">Tanggal Masuk</label>
                         <div class="col">
@@ -98,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Input Keluhan -->
+                    <!-- Edit Keluhan -->
                     <div class="form-group row mb-2">
                         <label for="keluhan" class="col-md-3 col-form-label">Keluhan</label>
                         <div class="col">
@@ -111,11 +122,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Input Jenis Perbaikan-->
+                    <!-- Edit Jenis Perbaikan-->
                     <div class="form-group row mb-2">
                         <label for="jenis_servis" class="col-md-3 col-form-label">Detail Jenis Servis</label>
                         <div class="col" id="perbaikan">
-                            <select class="form-select" id="jenis_servis" name="jenis_servis">
+                            <select class="form-select <?= isset($validation['jenis_servis']) ? 'is-invalid' : ''; ?>"
+                                id="jenis_servis" name="jenis_servis">
                                 <option selected>Pilih Jenis Servis</option>
                                 <?php foreach($servis as $s):?>
                                 <option value="<?= $s['id_jenis_servis']; ?>"
@@ -136,11 +148,12 @@
                                 readonly>
                         </div>
                     </div>
-                    <!-- Input Spare Part-->
+                    <!-- Edit Spare Part-->
                     <div class="form-group row mb-2">
                         <label for="spare_part" class="col-md-3 col-form-label">Detail Spare part</label>
                         <div class="col" id="perbaikan">
-                            <select class="form-select" id="nama_part" name="nama_part">
+                            <select class="form-select <?= isset($validation['nama_part']) ? 'is-invalid' : ''; ?>"
+                                id="nama_part" name="nama_part">
                                 <option selected>pilih spare part</option>
                                 <?php foreach($parts as $p):?>
                                 <option value="<?= $p['id_part']; ?>" data-jumlah="<?= $p['harga']; ?>">

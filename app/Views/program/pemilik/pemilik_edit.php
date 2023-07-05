@@ -2,25 +2,26 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Edit Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Pemilik</li>
-        <li class="breadcrumb-item active">Form Input Pemilik</li>
+        <li class="breadcrumb-item active">Form Edit Pemilik</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="text-center">
-                        Input Data Pelanggan
+                        Edit Data Pemilik
                     </h5>
                 </div>
                 <?= helper('form'); ?>
                 <form class="card-body" action="/program/pemilik/update/<?= $pemilik['id_pemilik']; ?>" method="POST">
                     <?= csrf_field(); ?>
+                    <!-- Ambil Params ID u/ Edit -->
                     <input type="hidden" name="id_pemilik" value="<?= old('id_pemilik', $pemilik['id_pemilik']); ?>">
                     <!-- Input Nama -->
                     <div class="form-group row mb-2">
@@ -70,7 +71,7 @@
                         </div>
                     </div>
                     <div class="row mx-auto" style="width: 100px;"><button type="submit"
-                            class="btn btn-primary">Submit</button></div>
+                            class="btn btn-primary">Simpan</button></div>
 
                 </form>
             </div>

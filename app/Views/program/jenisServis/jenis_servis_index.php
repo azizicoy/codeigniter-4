@@ -8,7 +8,7 @@
             <a href="/">Dashboard
             </a>
         </li>
-        <li class="breadcrumb-item active">Mobil</li>
+        <li class="breadcrumb-item active">Jenis Servis</li>
     </ol>
     <!-- CARD HOME -->
     <div class="row">
@@ -21,8 +21,8 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="align-center">Mobil</h5>
-                    <a href="/program/mobil/input" class="btn btn-primary"><i class="bi bi-file-plus"></i> Input</a>
+                    <h5 class="align-center">Daftar Jenis Servis</h5>
+                    <a href="/program/servis/input" class="btn btn-primary"><i class="bi bi-file-plus"></i> Input</a>
                 </div>
                 <div class="card-body shadow">
                     <table class="table table-striped bg-light" id="dataTable">

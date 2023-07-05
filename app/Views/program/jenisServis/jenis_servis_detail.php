@@ -2,68 +2,55 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Detail Data</h1>
+    <h1 class="mt-4">Form Input Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Pemilik</li>
-        <li class="breadcrumb-item active">Form Detail Pemilik</li>
+        <li class="breadcrumb-item active">Jenis Servis</li>
+        <li class="breadcrumb-item active">Form Input Jenis Servis</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Detail Data Pemilik
+                        Input Data Jenis Servis
                     </h5>
                 </div>
                 <div class="card-body">
                     <!-- DETAIL ID -->
                     <div class="form-group row mb-2">
-                        <label for="id_pemilik" class="col-md-3 col-form-label"><strong>Id Pemilik</strong></label>
+                        <label for="id_jenis_servis" class="col-md-3 col-form-label"><strong>Id Jenis
+                                Servis</strong></label>
                         <div class="col">
-                            <input type="text" id="id_pemilik" name="id_pemilik" class="form-control"
-                                value="<?= $pemilik['id_pemilik']; ?>" disabled autofocus>
+                            <input type="text" id="id_jenis_servis" name="id_jenis_servis" class="form-control"
+                                value="<?= $servis['id_jenis_servis']; ?>" disabled autofocus>
                         </div>
                     </div>
                     <!-- Input Nama -->
                     <div class="form-group row mb-2">
-                        <label for="nama_pemilik" class="col-md-3 col-form-label"><strong>Nama Pemilik</strong></label>
+                        <label for="jenis_servis" class="col-md-3 col-form-label"><strong>Nama Jenis
+                                Servis</strong></label>
                         <div class="col">
-                            <input type="text" id="nama_pemilik" name="nama_pemilik" class="form-control"
-                                value="<?= $pemilik['nama_pemilik']; ?>" disabled autofocus>
+                            <input type="text" id="jenis_servis" name="jenis_servis" class="form-control"
+                                value="<?= $servis['jenis_servis']; ?>" disabled autofocus>
                         </div>
                     </div>
                     <!-- Input E-Mail -->
                     <div class="form-group row mb-2">
-                        <label for="e_mail" class="col-md-3 col-form-label"><strong>E-Mail</strong></label>
+                        <label for="harga_jasa_servis" class="col-md-3 col-form-label"><strong>Harga Jasa
+                                Servis</strong></label>
                         <div class="col">
-                            <input type="email" id="e_mail" name="e_mail" class="form-control"
-                                value="<?= $pemilik['e_mail']; ?>" disabled>
-                        </div>
-                    </div>
-                    <!-- Input No. Telp -->
-                    <div class="form-group row mb-2">
-                        <label for="no_telp" class="col-md-3 col-form-label"><strong>Nomor Telepon</strong></label>
-                        <div class="col">
-                            <input type="tel" id="no_telp" name="no_telp" class="form-control"
-                                value="<?= $pemilik['no_telp']; ?>" disabled>
-                        </div>
-                    </div>
-                    <!-- Input Alamat -->
-                    <div class="form-group row mb-3">
-                        <label for="alamat" class="col-md-3 col-form-label"><strong>Alamat</strong></label>
-                        <div class="col">
-                            <textarea class="form-control" id="alamat" name="alamat" cols="10" rows="10"
-                                disabled><?= $pemilik['alamat']; ?></textarea>
+                            <input type="email" id="harga_jasa_servis" name="harga_jasa_servis" class="form-control"
+                                value="<?= $servis['harga_jasa_servis']; ?>" disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <a href="/pemilik/edit/<?= $pemilik['id_pemilik']; ?>" class="btn btn-success"><i
+                            <a href="/servis/edit/<?= $servis['id_jenis_servis']; ?>" class="btn btn-success"><i
                                     class="bi bi-pencil"></i> Edit</a>
-                            <form action="/program/pemilik/<?= $pemilik['id_pemilik']; ?>" method="post"
+                            <form action="/program/servis/<?= $servis['id_jenis_servis']; ?>" method="post"
                                 class="d-inline">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="DELETE">
@@ -73,7 +60,7 @@
                             </form>
                         </div>
                         <div class="col text-end">
-                            <a href="/pemilik">Kembali Ke Halaman Utama</a>
+                            <a href="/servis">Kembali Ke Halaman Utama</a>
                         </div>
                     </div>
                 </div>

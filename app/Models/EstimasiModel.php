@@ -18,9 +18,9 @@ class EstimasiModel extends Model
         ->join('tb_pemilik', 'tb_pemilik.id_pemilik = tb_estimasi_perbaikan.id_pemilik');
 
             if ($slug == false) 
-        {
+            {
             return $query->findAll();
-        }
+            }
 
         return $this->where(['id_estimasi' => $slug])->first();
     }

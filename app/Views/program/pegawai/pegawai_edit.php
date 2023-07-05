@@ -2,24 +2,25 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Edit Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Pegawai</li>
-        <li class="breadcrumb-item active">Form Input Pegawai</li>
+        <li class="breadcrumb-item active">Form Edit Pegawai</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="text-center">
-                        Input Data Pegawai
+                        Edit Data Pegawai
                     </h5>
                 </div>
                 <form class="card-body" action="/program/pegawai/update/<?= $pegawai['id_pegawai']; ?>" method="POST">
                     <?= csrf_field(); ?>
+                    <input type="hidden" name="id_pegawai" value="<?= old('id_pegawai', $pegawai['id_pegawai']); ?>">
                     <!-- Input Nama -->
                     <div class="form-group row mb-2">
                         <label for="kode_pegawai" class="col-md-3 col-form-label">Kode Pegawai</label>
@@ -81,7 +82,7 @@
                         <div class="col">
                             <select class="form-select <?= isset($validation['nama_vendor']) ? 'is-invalid' : ''; ?>"
                                 aria-label="Default select example" id="nama_vendor" name="nama_vendor">
-                                <option selected>Pilih Asal Vendor</option>
+                                <option selected disabled>Pilih Asal Vendor</option>
                                 <option value="ATU">ATU</option>
                                 <option value="GLASURIT">GLASURIT</option>
                                 <option value="PPG A">PPG A</option>
@@ -109,7 +110,7 @@
                         </div>
                     </div>
                     <div class="row mx-auto" style="width: 100px;"><button type="submit"
-                            class="btn btn-primary">Submit</button></div>
+                            class="btn btn-primary">Simpan</button></div>
 
                 </form>
             </div>

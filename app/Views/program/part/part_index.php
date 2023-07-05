@@ -8,7 +8,7 @@
             <a href="/">Dashboard
             </a>
         </li>
-        <li class="breadcrumb-item active">Part</li>
+        <li class="breadcrumb-item active">Daftar Spare Part</li>
     </ol>
     <!-- CARD HOME -->
     <div class="row">
@@ -21,8 +21,8 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="align-center">Pemilik Kendaraan</h5>
-                    <a href="/pemilik/pemilik_input" class="btn btn-primary">Input Data</a>
+                    <h5 class="align-center">Spare Part</h5>
+                    <a href="/part/part_input" class="btn btn-primary"><i class="bi bi-file-plus"></i> Input</a>
                 </div>
                 <div class="card-body shadow">
                     <table id="dataTable" class="table table-striped bg-light" style="width: 100%;">

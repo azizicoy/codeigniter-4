@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5 class="align-center">Estimasi Perbaikan</h5>
-                    <a href="/program/estimasi/input" class="btn btn-primary">Input Data</a>
+                    <a href="/program/estimasi/input" class="btn btn-primary"><i class="bi bi-file-plus"></i> Input</a>
                 </div>
                 <div class="card-body">
                     <?php if(session()->getFlashdata('pesan')): ?>

@@ -8,6 +8,7 @@ class PegawaiModel extends Model
 {
     protected $table            = 'tb_pegawai';
     protected $primaryKey       = 'id_pegawai';
+    protected $useTimestamps    = true;
     protected $allowedFields    = [
        'kode_pegawai', 'nama_pegawai', 'alamat_pegawai', 'e_mail_pegawai', 'no_telp_pegawai', 'nama_vendor'
     ];

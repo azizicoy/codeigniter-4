@@ -15,7 +15,7 @@
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="text-center">
-                        Input Data Pelanggan
+                        Input Data Pemilik
                     </h5>
                 </div>
                 <?= helper('form'); ?>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="row mx-auto" style="width: 100px;"><button type="submit"
-                            class="btn btn-primary">Submit</button></div>
+                            class="btn btn-primary">Simpan</button></div>
 
                 </form>
             </div>

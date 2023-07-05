@@ -12,7 +12,7 @@ class PemilikModel extends Model
     protected $allowedFields    = ['nama_pemilik', 'e_mail', 'no_telp', 'alamat'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

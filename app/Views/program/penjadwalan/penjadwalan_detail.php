@@ -2,68 +2,80 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Detail Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Pemilik</li>
-        <li class="breadcrumb-item active">Form Input Pemilik</li>
+        <li class="breadcrumb-item active">Penjadwalan</li>
+        <li class="breadcrumb-item active">Form Detail Penjadwalan</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Input Data Pelanggan
+                        Detail Data Penjadwalan
                     </h5>
                 </div>
                 <div class="card-body">
                     <!-- DETAIL ID -->
                     <div class="form-group row mb-2">
-                        <label for="id_pemilik" class="col-md-3 col-form-label"><strong>Id Pemilik</strong></label>
+                        <label for="id_penjadwalan" class="col-md-3 col-form-label"><strong>Id
+                                Penjadwalan</strong></label>
                         <div class="col">
-                            <input type="text" id="id_pemilik" name="id_pemilik" class="form-control"
-                                value="<?= $pemilik['id_pemilik']; ?>" disabled autofocus>
+                            <input type="text" id="id_penjadwalan" name="id_penjadwalan" class="form-control"
+                                value="<?= $penjadwalan['id_penjadwalan']; ?>" disabled autofocus>
                         </div>
                     </div>
-                    <!-- Input Nama -->
+                    <!-- Detail Nama -->
                     <div class="form-group row mb-2">
-                        <label for="nama_pemilik" class="col-md-3 col-form-label"><strong>Nama Pemilik</strong></label>
+                        <label for="id_estimasi" class="col-md-3 col-form-label"><strong>Id Estimasi</strong></label>
                         <div class="col">
-                            <input type="text" id="nama_pemilik" name="nama_pemilik" class="form-control"
-                                value="<?= $pemilik['nama_pemilik']; ?>" disabled autofocus>
+                            <input type="text" id="id_estimasi" name="id_estimasi" class="form-control"
+                                value="<?= $penjadwalan['kode_estimasi']; ?>" disabled autofocus>
                         </div>
                     </div>
-                    <!-- Input E-Mail -->
+                    <!-- Detail Kode Penjadwalan -->
                     <div class="form-group row mb-2">
-                        <label for="e_mail" class="col-md-3 col-form-label"><strong>E-Mail</strong></label>
+                        <label for="kode_penjadwalan" class="col-md-3 col-form-label"><strong>Kode
+                                Penjadwalan</strong></label>
                         <div class="col">
-                            <input type="email" id="e_mail" name="e_mail" class="form-control"
-                                value="<?= $pemilik['e_mail']; ?>" disabled>
+                            <input type="text" id="kode_penjadwalan" name="kode_penjadwalan" class="form-control"
+                                value="<?= $penjadwalan['kode_penjadwalan']; ?>" disabled>
                         </div>
                     </div>
-                    <!-- Input No. Telp -->
+                    <!-- Detail Tanggal Dimulai -->
                     <div class="form-group row mb-2">
-                        <label for="no_telp" class="col-md-3 col-form-label"><strong>Nomor Telepon</strong></label>
+                        <label for="tgl_dimulai" class="col-md-3 col-form-label"><strong>Tanggal
+                                Dimulai</strong></label>
                         <div class="col">
-                            <input type="tel" id="no_telp" name="no_telp" class="form-control"
-                                value="<?= $pemilik['no_telp']; ?>" disabled>
+                            <input type="text" id="tgl_dimulai" name="tgl_dimulai" class="form-control"
+                                value="<?= $penjadwalan['tgl_dimulai']; ?>" disabled>
                         </div>
                     </div>
-                    <!-- Input Alamat -->
+                    <!-- Detail Tanggal Selesai -->
                     <div class="form-group row mb-3">
-                        <label for="alamat" class="col-md-3 col-form-label"><strong>Alamat</strong></label>
+                        <label for="tgl_selesai" class="col-md-3 col-form-label"><strong>Tanggal
+                                Selesai</strong></label>
                         <div class="col">
-                            <textarea class="form-control" id="alamat" name="alamat" cols="10" rows="10"
-                                disabled><?= $pemilik['alamat']; ?></textarea>
+                            <input type="text" id="tgl_selesai" name="tgl_selesai" class="form-control"
+                                value="<?= $penjadwalan['tgl_selesai']; ?>" disabled>
+                        </div>
+                    </div>
+                    <!-- Detail Status -->
+                    <div class="form-group row mb-3">
+                        <label for="status" class="col-md-3 col-form-label"><strong>Status</strong></label>
+                        <div class="col">
+                            <input type="text" id="status" name="status" class="form-control"
+                                value="<?= $penjadwalan['status']; ?>" disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <a href="/pemilik/edit/<?= $pemilik['id_pemilik']; ?>" class="btn btn-success"><i
-                                    class="bi bi-pencil"></i> Edit</a>
-                            <form action="/program/pemilik/<?= $pemilik['id_pemilik']; ?>" method="post"
+                            <a href="/penjadwalan/edit/<?= $penjadwalan['id_penjadwalan']; ?>"
+                                class="btn btn-success"><i class="bi bi-pencil"></i> Edit</a>
+                            <form action="/program/penjadwalan/<?= $penjadwalan['id_penjadwalan']; ?>" method="post"
                                 class="d-inline">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="DELETE">
@@ -73,7 +85,7 @@
                             </form>
                         </div>
                         <div class="col text-end">
-                            <a href="/pemilik">Kembali Ke Halaman Utama</a>
+                            <a href="/penjadwalan">Kembali Ke Halaman Utama</a>
                         </div>
                     </div>
                 </div>

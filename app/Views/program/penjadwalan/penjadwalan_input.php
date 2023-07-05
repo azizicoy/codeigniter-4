@@ -15,12 +15,14 @@
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="text-center">
-                        Input Data Pelanggan
+                        Input Data Penjadwalan
                     </h5>
                 </div>
                 <?= helper('form'); ?>
                 <form class="card-body" action="/program/penjadwalan/save" method="POST">
                     <?= csrf_field(); ?>
+                    <!-- input status hidden -->
+                    <input type="hidden" name="status" value="Baru">
                     <!-- Input Estimasi -->
                     <div class="form-group row mb-2">
                         <label for="id_estimasi" class="col-md-3 col-form-label">Kode Estimasi</label>
@@ -29,7 +31,7 @@
                                 id="id_estimasi" name="id_estimasi">
                                 <option selected value="">Kode Estimasi</option>
                                 <?php foreach($estimasi as $e): ?>
-                                <option value="<?= $e['id_estimasi']; ?>"><?= $e['id_estimasi']; ?></option>
+                                <option value="<?= $e['id_estimasi']; ?>"><?= $e['kode_estimasi']; ?></option>
                                 <?php endforeach ?>
                             </select>
                             <!-- error -->
@@ -79,7 +81,7 @@
                     </div>
 
                     <div class="row mx-auto" style="width: 100px;"><button type="submit"
-                            class="btn btn-primary">Submit</button></div>
+                            class="btn btn-primary">Simpan</button></div>
 
                 </form>
             </div>

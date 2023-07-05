@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mx-auto"><button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="row mx-auto"><button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
                 <div class="card-footer text-center py-3">

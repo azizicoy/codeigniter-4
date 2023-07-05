@@ -19,7 +19,7 @@
     <?php endif; ?>
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="align-center">Pemilik Kendaraan</h5>
+            <h5 class="align-center">Daftar Pemilik Kendaraan</h5>
             <a href="/pemilik/pemilik_input" class="btn btn-primary"><i class="bi bi-file-plus"></i> Input</a>
         </div>
         <div class="card-body shadow">

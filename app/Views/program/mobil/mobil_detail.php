@@ -2,7 +2,7 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Detail Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
@@ -15,7 +15,7 @@
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Detail Mobil
+                        Detail Data Mobil
                     </h5>
                 </div>
                 <div class="card-body">
@@ -97,7 +97,7 @@
                         <div class="col">
                             <a href="/mobil/edit/<?= $mobil['id_mobil']; ?>" class="btn btn-success"><i
                                     class="bi bi-pencil"></i> Edit</a>
-                            <form action="/program/pegawai/detail/<?= $mobil['id_mobil']; ?>" method="post"
+                            <form action="/program/mobil/detail/<?= $mobil['id_mobil']; ?>" method="post"
                                 class="d-inline">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="DELETE">

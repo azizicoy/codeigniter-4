@@ -21,7 +21,7 @@
     <?php endif; ?>
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="align-center">Penjadwalan</h5>
+            <h5 class="align-center">Daftar Penjadwalan</h5>
             <a href="/penjadwalan/penjadwalan_input" class="btn btn-primary"><i class="bi bi-file-plus"></i> Input</a>
         </div>
         <div class="card-body shadow">
@@ -42,19 +42,24 @@
                     <tr>
                         <th scope="row"><?= $i++; ?></th>
                         <td><?= $j['kode_estimasi']; ?></td>
-                        <td><?= $j['tgl_dimulai']; ?></td>
+                        <td><?= $j['tgl_dimulai'];  ?> </td>
                         <td><?= $j['tgl_selesai']; ?></td>
-                        <td><?php if ($j['status'] == 'Sedang Dikerjakan'): ?>
-                            <a href="/penjadwalan/selesai/<?= $j['id_penjadwalan']; ?>" class="btn btn-success">
-                                <i class="bi bi-check-circle"></i> Selesai
-                            </a>
-                            <?php elseif ($j['status'] == 'Selesai'): ?>
-                            <span class="text-success"><i class="bi bi-check-circle-fill"></i> Selesai</span>
-                            <?php else: ?>
-                            <a href="/penjadwalan/dikerjakan/<?= $j['id_penjadwalan']; ?>" class="btn btn-primary">
-                                <i class="bi bi-wrench"></i> Sedang Dikerjakan
-                            </a>
-                            <?php endif; ?>
+                        <td>
+                            <!-- Tambahkan form untuk mengubah status -->
+                            <form action="/penjadwalan/update-status/<?= $j['id_penjadwalan']; ?>" method="post">
+                                <?= csrf_field(); ?>
+                                <div class="input-group">
+                                    <select class="form-select" name="status">
+                                        <option value="Sedang Dikerjakan"
+                                            <?= ($j['status'] == 'Sedang Dikerjakan') ? 'selected' : ''; ?>>Sedang
+                                            Dikerjakan</option>
+                                        <option value="Selesai" <?= ($j['status'] == 'Selesai') ? 'selected' : ''; ?>>
+                                            Selesai</option>
+                                    </select>
+                                    <button class="btn btn-primary" type="submit">Ubah Status</button>
+                                </div>
+                            </form>
+
                         </td>
                         <td class="text-center"><a href="/penjadwalan/<?= $j['id_penjadwalan']; ?>"
                                 class="btn btn-success"><i class="bi bi-info-circle"></i></i> Detail</a>

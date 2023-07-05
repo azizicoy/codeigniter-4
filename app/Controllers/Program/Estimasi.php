@@ -48,6 +48,7 @@ class Estimasi extends BaseController
         return view('program/estimasi/estimasi_index', $data);
     }
 
+    // ===============================DETAIL===================================
     public function detail($slug)
     {
         $data = [
@@ -65,23 +66,23 @@ class Estimasi extends BaseController
     }
 
     // Ke Preview Print 
-    public function prev($slug)
-    {
-        $data = [
-            'judul'     => 'Halaman Print Preview | Program',
-            'utama'     => 'Print',
-            'estimasi'  => $this->estimasiModel->getEstimasi($slug),
-            'detail'    => $this->detailEstimasiModel->getDetail($slug),
-        ];
+    // public function prev($slug)
+    // {
+    //     $data = [
+    //         'judul'     => 'Halaman Print Preview | Program',
+    //         'utama'     => 'Print',
+    //         'estimasi'  => $this->estimasiModel->getEstimasi($slug),
+    //         'detail'    => $this->detailEstimasiModel->getDetail($slug),
+    //     ];
         
-        if (empty($data['estimasi'])) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Nama Estimasi Tidak Ada');
-        }
+    //     if (empty($data['estimasi'])) {
+    //         throw new \CodeIgniter\Exceptions\PageNotFoundException('Nama Estimasi Tidak Ada');
+    //     }
         
-        return view('program/estimasi/estimasi_print', $data);
-    }
+    //     return view('program/estimasi/estimasi_print', $data);
+    // }
 
-    
+    // =============================PRINT==========================================
     public function print($slug)
     {
         $dompdf = new Dompdf();
@@ -113,6 +114,8 @@ class Estimasi extends BaseController
         // Output the generated PDF to Browser
         $dompdf->stream('Estimasi-Biaya.pdf', array('Attachment'=>false));
     }
+
+    // ===============================INPUT=======================================
     public function input()
     {
         $data = [
@@ -130,7 +133,7 @@ class Estimasi extends BaseController
         return view('program/estimasi/estimasi_input', $data);
     }
     
-    // Save Estimasi
+    // ==============================Save Estimasi==================================
     public function save()
     {
         helper('form');
@@ -255,7 +258,7 @@ class Estimasi extends BaseController
         return redirect()->to('/program/estimasi/index')->with('pesan', 'Data Berhasil Diinput.');
     }
     
-    // Fungsi Edit
+    // ==============================Fungsi Edit========================================
     public function edit($slug)
     {
         helper('form');
@@ -273,38 +276,38 @@ class Estimasi extends BaseController
         return view('program/estimasi/estimasi_edit', $data);
     }
 
-    // Update Edit
+    // ================================Update Edit======================================
     public function update($slug) 
     {
          
          helper('form');
          // Rules nama
-         $namaLama = $this->pemilikModel->getPemilik($this->request->getVar('id_pemilik'));
-         if($namaLama['nama_pemilik'] == $this->request->getVar('nama_pemilik'))
+         $namaLama = $this->estimasiModel->getEstimasi($this->request->getVar('id_estimasi'));
+         if($namaLama['id_pemilik'] == $this->request->getVar('id_pemilik'))
          {
              $ruleNama = 'required';
          } else {
-             $ruleNama = 'required|is_unique[tb_pemilik.nama_pemilik]';
+             $ruleNama = 'required|is_unique[tb_estimasi_perbaikan.id_pemilik]';
          }
-         // Rules Email
-         $emailLama = $this->pemilikModel->getPemilik($this->request->getVar('id_pemilik'));
-         if($emailLama['e_mail'] == $this->request->getVar('e_mail'))
+         // Rules nopol
+         $nopolLama = $this->estimasiModel->getEstimasi($this->request->getVar('id_estimasi'));
+         if($nopolLama['id_mobil'] == $this->request->getVar('id_mobil'))
          {
-             $ruleEmail = 'required';
+             $ruleNopol = 'required';
          } else {
-             $ruleEmail = 'required|is_unique[tb_pemilik.e_mail]';
+             $ruleNopol = 'required|is_unique[tb_estimasi_perbaikan.id_mobil]';
          }
-         // Rules NoTelp
-         $no_telpLama = $this->pemilikModel->getPemilik($this->request->getVar('id_pemilik'));
-         if($no_telpLama['no_telp'] == $this->request->getVar('no_telp'))
+         // Rules kode estimasi
+         $kodeLama = $this->estimasiModel->getEstimasi($this->request->getVar('id_estimasi'));
+         if($kodeLama['kode_estimasi'] == $this->request->getVar('kode_estimasi'))
          {
-             $ruleNoTelp = 'required';
+             $ruleKode = 'required';
          } else {
-             $ruleNoTelp = 'required|is_unique[tb_pemilik.no_telp]';
+             $ruleKode = 'required|is_unique[tb_estimasi_perbaikan.kode_estimasi]';
          }
          // Rules Validasi
          if (!$this->validate([
-         'nama_pemilik' => 
+         'id_pemilik' => 
          [
              'rules' => $ruleNama,
              'errors' =>[
@@ -312,46 +315,77 @@ class Estimasi extends BaseController
                  'is_unique' => 'Nama Pemilik sudah terdaftar' 
              ]
          ],
-         'e_mail' => 
+         'id_mobil' => 
          [
-             'rules' => $ruleEmail,
+             'rules' => $ruleNopol,
              'errors' =>[
-                 'required' => 'E-Mail harus diisi', 
-                 'is_unique' => 'E-Mail sudah terdaftar'
+                 'required' => 'Nomor Polisi harus diisi', 
+                 'is_unique' => 'Nomor Polisi sudah terdaftar'
              ]
          ],
-         'no_telp' => 
-         [
-             'rules' => $ruleNoTelp,
-             'errors' =>[
-                 'required' => 'Nomor Telepon harus diisi', 
-                 'is_unique' => 'Nomor Telepon sudah terdaftar'  
-             ]
-         ],
-         'alamat' => 
+         'id_pegawai' => 
          [
              'rules' => 'required',
              'errors' =>[
-                 'required' => 'Alamat harus diisi'
+                 'required' => 'Nama Pegawai harus diisi',   
+             ]
+         ],
+         'kode_estimasi' => 
+         [
+             'rules' => $ruleKode,
+             'errors' =>[
+                 'required' => 'Kode Estimasi harus diisi',
+                 'is_unique' => 'Kode Estimasi sudah terdaftar'
                          ]
-         ]
+             ],
+         'tgl_estimasi' => 
+         [
+             'rules' => 'required',
+             'errors' =>[
+                 'required' => 'Tanggal Estimasi harus diisi'
+                         ]
+             ],
+         'keluhan' => 
+         [
+             'rules' => 'required',
+             'errors' =>[
+                 'required' => 'Keluhan harus diisi'
+                         ]
+             ],
+         'jenis_servis' => 
+         [
+             'rules' => 'required',
+             'errors' =>[
+                 'required' => 'Jenis Servis harus diisi'
+                         ]
+             ],
+         'nama_part' => 
+         [
+             'rules' => 'required',
+             'errors' =>[
+                 'required' => 'Spare Part harus diisi'
+                         ]
+             ],
          ]))
          {
-             return redirect()->to('/pemilik/edit/' . $this->request->getVar('id_pemilik'))->withInput()->with('validation', $this->validator->getErrors());
+             return redirect()->to('/estimasi/edit/' . $this->request->getVar('id_estimasi'))->withInput()->with('validation', $this->validator->getErrors());
          }
         //  simpan data edit
-        $this->pemilikModel->save 
+        $this->estimasiModel->save 
         ([
-            'id_pemilik' => $slug,    
-            'nama_pemilik' => $this->request->getVar('nama_pemilik'),
-            'e_mail' => $this->request->getVar('e_mail'),
-            'no_telp' => $this->request->getVar('no_telp'),
-            'alamat' => $this->request->getVar('alamat'),
+            'id_estimasi'   => $slug,    
+            'id_pemilik'    => $this->request->getVar('id_pemilik'),
+            'id_mobil'      => $this->request->getVar('id_mobil'),
+            'id_pegawai'    => $this->request->getVar('id_pegawai'),
+            'kode_estimasi' => $this->request->getVar('kode_estimasi'),
+            'tgl_estimasi'  => $this->request->getVar('tgl_estimasi'),
+            'jenis_servis'  => $this->request->getVar('jenis_servis'),
+            'nama_part'     => $this->request->getVar('nama_part'),
         ]);
         
         session()->setFlashdata('pesan', 'Data Berhasil Diubah!');
 
-        return redirect()->to('/program/pemilik/index');
+        return redirect()->to('/program/estimasi/index');
     }
 
     // ================================DELETE ESTIMASI================================
@@ -360,16 +394,6 @@ class Estimasi extends BaseController
         $this->estimasiModel->delete($id);
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus!');
         return redirect()->to('/program/estimasi/index');
-    }
-
-    // contoh print
-    public function contoh()
-    {
-        $data = [
-            'estimasi'  => $this->estimasiModel->getEstimasi(),
-            'detail'    => $this->detailEstimasiModel->getDetail(),
-        ];
-        return view('program/estimasi/estimasi_print', $data);
     }
 
     

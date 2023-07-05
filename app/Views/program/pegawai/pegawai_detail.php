@@ -2,20 +2,20 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Detail Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Pemilik</li>
-        <li class="breadcrumb-item active">Form Input Pemilik</li>
+        <li class="breadcrumb-item active">Pegawai</li>
+        <li class="breadcrumb-item active">Form Detail Pegawai</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="card-title">
-                        Input Data Pelanggan
+                        Detail Data Pegawai
                     </h5>
                 </div>
                 <div class="card-body">

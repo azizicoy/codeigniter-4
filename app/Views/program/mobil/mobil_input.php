@@ -138,7 +138,7 @@
                         </div>
                     </div>
                     <div class="row mx-auto" style="width: 100px;">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

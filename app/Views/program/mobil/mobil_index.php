@@ -21,7 +21,7 @@
             <?php endif; ?>
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="align-center">Mobil</h5>
+                    <h5 class="align-center">Daftar Mobil</h5>
                     <a href="/program/mobil/input" class="btn btn-primary"><i class="bi bi-file-plus"></i> Input</a>
                 </div>
                 <div class="card-body shadow">

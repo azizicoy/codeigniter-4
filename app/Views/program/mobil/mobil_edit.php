@@ -2,25 +2,26 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Detail Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Mobil</li>
-        <li class="breadcrumb-item active">Form Input Mobil</li>
+        <li class="breadcrumb-item active"><a href="/mobil">Mobil</a></li>
+        <li class="breadcrumb-item active">Form Detail Mobil</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="text-center">
-                        Input Data Mobil
+                        Detail Data Mobil
                     </h5>
                 </div>
                 <?= helper('form'); ?>
-                <form class="card-body" action="/program/mobil/save" method="POST">
+                <form class="card-body" action="/program/mobil/update/<?= $mobil['id_mobil']; ?>" method="POST">
                     <?= csrf_field(); ?>
+                    <input type="hidden" name="id_mobil" value="<?= old('id_mobil', $mobil['id_mobil']); ?>">
                     <!-- Input Mobil -->
                     <div class="form-group row mb-2">
                         <label for="nopol" class="col-md-3 col-form-label"><strong>Nomor Polisi</strong></label>
@@ -37,16 +38,19 @@
                     </div>
                     <!-- Nama Pemilik -->
                     <div class="form-group row mb-2">
-                        <label for="nama_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
+                        <label for="id_pemilik" class="col-md-3 col-form-label">Nama Pemilik</label>
                         <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>pilih salah satu</option>
+                            <select class="form-select <?= isset($validation['id_pemilik']) ? 'is-invalid' : ''; ?>"
+                                aria-label="Default select example" name="id_pemilik">
+                                <option selected disabled>pilih salah satu</option>
                                 <?php foreach ($pemilik as $p): ?>
-                                <option value="<?= $p['id_pemilik']; ?>"><?= $p['nama_pemilik']; ?></option>
-                                <?php endforeach ?>
+                                <option value="<?= $p['id_pemilik']; ?>"
+                                    <?= old('id_pemilik', $mobil['id_pemilik']) == $p['id_pemilik'] ? 'selected' : ''; ?>>
+                                    <?= $p['nama_pemilik']; ?>
+                                </option> <?php endforeach ?>
                             </select>
                             <div id="validationServer03Feedback" class="invalid-feedback">
-                                <?= $validation['nama_pemilik'] ?? ''; ?>
+                                <?= $validation['id_pemilik'] ?? ''; ?>
                             </div>
                         </div>
                     </div>
@@ -59,17 +63,43 @@
                             <select
                                 class="form-select <?= isset($validation['jenis_kendaraan']) ? 'is-invalid' : ''; ?>"
                                 id="jenis_kendaraan" name="jenis_kendaraan" aria-label="Default select example">
-                                <option selected>Pilih Jenis Kendaraan</option>
-                                <option value="APV">APV</option>
-                                <option value="Baleno">Baleno</option>
-                                <option value="Carry">Carry</option>
-                                <option value="Ertiga">Ertiga</option>
-                                <option value="Grand Vitara">Grand Vitara</option>
-                                <option value="Ignis">Ignis</option>
-                                <option value="Karimun">Karimun</option>
-                                <option value="Splash">Splash</option>
-                                <option value="Swift">Swift</option>
-                                <option value="SX4">SX4</option>
+                                <option selected disabled>Pilih Jenis Kendaraan</option>
+                                <option value="APV"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'APV' ? 'selected' : ''; ?>>
+                                    APV
+                                </option>
+                                <option value="Baleno"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Baleno' ? 'selected' : ''; ?>>
+                                    Baleno</option>
+                                <option value="Carry"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Carry' ? 'selected' : ''; ?>>
+                                    Carry
+                                </option>
+                                <option value="Ertiga"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Ertiga' ? 'selected' : ''; ?>>
+                                    Ertiga</option>
+                                <option value="Grand Vitara"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Grand Vitara' ? 'selected' : ''; ?>>
+                                    Grand Vitara
+                                </option>
+                                <option value="Ignis"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Ignis' ? 'selected' : ''; ?>>
+                                    Ignis
+                                </option>
+                                <option value="Karimun"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Karimun' ? 'selected' : ''; ?>>
+                                    Karimun</option>
+                                <option value="Splash"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Splash' ? 'selected' : ''; ?>>
+                                    Splash</option>
+                                <option value="Swift"
+                                    <?= old('jenis_kendaraan', $mobil['jenis_kendaraan']) == 'Swift' ? 'selected' : ''; ?>>
+                                    Swift
+                                </option>
+                                <option value="SX4"
+                                    <?= old('jenis_kendaraan' ,$mobil['jenis_kendaraan']) == 'SX4' ? 'selected' : ''; ?>>
+                                    SX4
+                                </option>
                             </select>
                             <div id="jenis_kendaraan" class="invalid-feedback">
                                 <?= $validation['jenis_kendaraan'] ?? ''; ?>
@@ -137,7 +167,7 @@
                         </div>
                     </div>
                     <div class="row mx-auto" style="width: 100px;">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

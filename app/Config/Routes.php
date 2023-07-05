@@ -64,13 +64,22 @@ $routes->delete('/mobil/(:num)', 'Program\Mobil::delete/$1'); // ROUTES KE CONTR
 $routes->get('/mobil/(:any)', 'Program\Mobil::detail/$1'); // ROUTES KE CONTROLLER MOBIL
 
 $routes->get('/part', 'Program\Part::index'); // ROUTES KE CONTROLLER PART
+$routes->get('/part/part_input', 'Program\Part::input'); // ROUTES KE CONTROLLER PART INPUT
+$routes->get('/part/edit/(:segment)', 'Program\Part::edit/$1'); // ROUTES KE CONTROLLER EDIT
+$routes->get('/part/(:any)', 'Program\Part::detail/$1'); // ROUTES KE CONTROLLER PEMILIK
 
 $routes->get('/penjadwalan', 'Program\Penjadwalan::index'); // ROUTES KE CONTROLLER PENJADWALAN
 $routes->get('/penjadwalan/penjadwalan_input', 'Program\Penjadwalan::input'); // ROUTES KE CONTROLLER PENJADWALAN Input
+$routes->post('/penjadwalan/update-status/(:num)', 'Program\Penjadwalan::updateStatus/$1');
 $routes->get('/penjadwalan/edit/(:segment)', 'Program\Penjadwalan::edit/$1'); // ROUTES KE CONTROLLER EDIT
 $routes->delete('/program/penjadwalan/(:num)', 'Program\Penjadwalan::delete/$1'); // ROUTES KE CONTROLLER PEMILIK
+$routes->get('/penjadwalan/(:any)', 'Program\Penjadwalan::detail/$1'); // ROUTES KE CONTROLLER PENJADWALAN
 
 $routes->get('/servis', 'Program\Servis::index'); // ROUTES KE CONTROLLER JENIS SERVIS
+$routes->get('/servis/edit/(:segment)', 'Program\Servis::edit/$1'); // ROUTES KE CONTROLLER EDIT
+$routes->delete('/program/servis/(:num)', 'Program\servis::delete/$1'); // ROUTES KE CONTROLLER SERVIS DELETE
+$routes->get('/servis/(:any)', 'Program\Servis::detail/$1'); // ROUTES KE CONTROLLER JENIS SERVIS DETAIL
+
 
 
 // $routes->get('/', 'Pemilik::index');
