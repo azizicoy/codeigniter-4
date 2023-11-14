@@ -31,7 +31,7 @@
                         <th scope="col">No</th>
                         <th>Kode Estimasi</th>
                         <th>Tanggal Dimulai</th>
-                        <th>Tanggal Selesai</th>
+                        <th>Tanggal Penyerahan</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -42,8 +42,8 @@
                     <tr>
                         <th scope="row"><?= $i++; ?></th>
                         <td><?= $j['kode_estimasi']; ?></td>
-                        <td><?= $j['tgl_dimulai'];  ?> </td>
-                        <td><?= $j['tgl_selesai']; ?></td>
+                        <td><?= date('d-m-Y', strtotime($j['tgl_dimulai']));?> </td>
+                        <td><?= date('d-m-Y', strtotime($j['tgl_penyerahan'])); ?></td>
                         <td>
                             <!-- Tambahkan form untuk mengubah status -->
                             <form action="/penjadwalan/update-status/<?= $j['id_penjadwalan']; ?>" method="post">
@@ -72,7 +72,7 @@
                         <th>No</th>
                         <th>Kode Estimasi</th>
                         <th>Tanggal Dimulai</th>
-                        <th>Tanggal Selesai</th>
+                        <th>Tanggal Penyerahan</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -86,7 +86,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website <?= date('Y'); ?></div>
+            <div class="text-muted">Copyright &copy; Muhammad Irfan Azizi <?= date('Y'); ?></div>
         </div>
     </div>
 </footer>

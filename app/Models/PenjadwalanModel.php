@@ -8,7 +8,7 @@ class PenjadwalanModel extends Model
 {
     protected $table            = 'tb_penjadwalan';
     protected $primaryKey       = 'id_penjadwalan';
-    protected $allowedFields    = ['id_estimasi', 'kode_penjadwalan', 'tgl_dimulai', 'tgl_selesai', 'status'];
+    protected $allowedFields    = ['id_estimasi', 'kode_penjadwalan', 'tgl_dimulai', 'tgl_penyerahan', 'status'];
 
     public function getPenjadwalan($slug = false)
     {
@@ -30,7 +30,7 @@ class PenjadwalanModel extends Model
 
     public function getEarliestDueDate()
     {
-        $query = $this->select('tgl_dimulai, tgl_selesai')->orderBy('tgl_dimulai', 'ASC')->first();
+        $query = $this->select('tgl_dimulai, tgl_penyerahan')->orderBy('tgl_dimulai', 'ASC')->first();
         return $query;
     }
 

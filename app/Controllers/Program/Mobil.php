@@ -56,6 +56,7 @@ class Mobil extends BaseController
             'utama' => 'Mobil',
             'pemilik' => $pemilik,
             'validation' => session('validation'),
+            'pemilikTerpilih' => []
         ];
         return view('program/mobil/mobil_input', $data);
     }

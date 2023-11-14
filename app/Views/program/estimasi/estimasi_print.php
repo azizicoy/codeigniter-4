@@ -88,7 +88,7 @@
                 </tr>
                 <tr>
                     <td>JL. Raya Bekasi KM. 19 Pulogadung</td>
-                    <td>Tanggal/Jam</td>
+                    <td>Tanggal</td>
                     <td><span> <?= date('d-m-Y', strtotime($estimasi['tgl_estimasi'])); ?></span></td>
                 </tr>
                 <tr>

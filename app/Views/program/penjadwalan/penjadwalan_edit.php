@@ -76,17 +76,17 @@
                         </div>
                     </div>
 
-                    <!-- =========================Input Tanggal selesai============================================ -->
+                    <!-- =========================Input Tanggal Penyerahan============================================ -->
                     <div class="form-group row mb-2">
-                        <label for="tgl_selesai" class="col-md-3 col-form-label">Tanggal Selesai</label>
+                        <label for="tgl_penyerahan" class="col-md-3 col-form-label">Tanggal Penyerahan</label>
                         <div class="col">
                             <input type="datetime-local"
-                                class="form-control <?= isset($validation['tgl_selesai']) ? 'is-invalid' : ''; ?>"
-                                value="<?= old('tgl_selesai', $penjadwalan['tgl_selesai']);?>" id="tgl_selesai"
-                                name="tgl_selesai">
+                                class="form-control <?= isset($validation['tgl_penyerahan']) ? 'is-invalid' : ''; ?>"
+                                value="<?= old('tgl_penyerahan', $penjadwalan['tgl_penyerahan']);?>" id="tgl_penyerahan"
+                                name="tgl_penyerahan">
                             <!-- error -->
                             <div id="invalid" class="invalid-feedback">
-                                <?= $validation['tgl_selesai'] ?? ''; ?>
+                                <?= $validation['tgl_penyerahan'] ?? ''; ?>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website <?= date('Y'); ?></div>
+            <div class="text-muted">Copyright &copy; Muhammad Irfan Azizi <?= date('Y'); ?></div>
         </div>
     </div>
 </footer>

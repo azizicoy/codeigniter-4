@@ -41,7 +41,7 @@ class Program extends BaseController
 
         // Mengurutkan penjadwalan berdasarkan tanggal selesai secara ascending (earliest due date)
         usort($penjadwalanData, function ($a, $b) {
-            return strtotime($a['tgl_selesai']) - strtotime($b['tgl_selesai']);
+            return strtotime($a['tgl_penyerahan']) - strtotime($b['tgl_penyerahan']);
         });
 
         $events = [];
@@ -50,7 +50,7 @@ class Program extends BaseController
                 'id' => $data['id_penjadwalan'],
                 'content' => $data['kode_penjadwalan'],
                 'start' => date('Y-m-d H:i:s', strtotime($data['tgl_dimulai'])),
-                'end' => date('Y-m-d H:i:s', strtotime($data['tgl_selesai'])),
+                'end' => date('Y-m-d H:i:s', strtotime($data['tgl_penyerahan'])),
             ];
             $events[] = $event;
         }
@@ -59,6 +59,7 @@ class Program extends BaseController
             'judul'         => 'Halaman Utama | Program',
             'estimasi'      => $this->estimasiModel->countAllResults(),
             'mobil'         => $this->mobilModel->countAllResults(),
+            'penjadwalan'   => $this->penjadwalanModel->countAllResults(),
             'edd'           => $this->penjadwalanModel->getEarliestDueDate(),
             'events'        => $events
         ];

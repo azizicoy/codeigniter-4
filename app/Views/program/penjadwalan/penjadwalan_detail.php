@@ -11,7 +11,7 @@
         <li class="breadcrumb-item active">Form Detail Penjadwalan</li>
     </ol>
     <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-9 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="card-title">
@@ -54,13 +54,13 @@
                                 value="<?= $penjadwalan['tgl_dimulai']; ?>" disabled>
                         </div>
                     </div>
-                    <!-- Detail Tanggal Selesai -->
-                    <div class="form-group row mb-3">
-                        <label for="tgl_selesai" class="col-md-3 col-form-label"><strong>Tanggal
-                                Selesai</strong></label>
+                    <!-- Detail Tanggal Penyerahan -->
+                    <div class="form-group row mb-2">
+                        <label for="tgl_penyerahan" class="col-md-3 col-form-label"><strong>Tanggal
+                                Penyerahan</strong></label>
                         <div class="col">
-                            <input type="text" id="tgl_selesai" name="tgl_selesai" class="form-control"
-                                value="<?= $penjadwalan['tgl_selesai']; ?>" disabled>
+                            <input type="text" id="tgl_penyerahan" name="tgl_penyerahan" class="form-control"
+                                value="<?= $penjadwalan['tgl_penyerahan']; ?>" disabled>
                         </div>
                     </div>
                     <!-- Detail Status -->
@@ -97,7 +97,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+            <div class="text-muted">Copyright &copy; Muhammad Irfan Azizi <?= date('Y'); ?></div>
         </div>
     </div>
 </footer>

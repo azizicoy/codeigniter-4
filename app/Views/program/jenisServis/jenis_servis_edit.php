@@ -2,20 +2,20 @@
 <!-- KOnten ISi -->
 <?= $this->section('konten'); ?>
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Form Input Data</h1>
+    <h1 class="mt-4">Form Edit Data</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">
             <a href="/">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Jenis Servis</li>
-        <li class="breadcrumb-item active">Form Input Jenis Servis</li>
+        <li class="breadcrumb-item active">Form Edit Jenis Servis</li>
     </ol>
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card mb-4 shadow">
                 <div class="card-header">
                     <h5 class="text-center">
-                        Input Data Jenis Servis
+                        Edit Data Jenis Servis
                     </h5>
                 </div>
                 <?= helper('form'); ?>
@@ -64,7 +64,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website <?= date('Y'); ?></div>
+            <div class="text-muted">Copyright &copy; Muhammad Irfan Azizi <?= date('Y'); ?></div>
         </div>
     </div>
 </footer>

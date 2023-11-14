@@ -3,7 +3,6 @@
 namespace App\Controllers\Program;
 
 use App\Models\PenjadwalanModel;
-use App\Models\EstimasiModelModel;
 use App\Controllers\BaseController;
 use App\Models\EstimasiModel;
 
@@ -86,11 +85,11 @@ class Penjadwalan extends BaseController
                  'required' => 'Tanggal harus diisi'
              ]
          ],
-         'tgl_selesai' => 
+         'tgl_penyerahan' => 
          [
              'rules' => 'required',
              'errors' =>[
-                 'required' => 'Tgl_selesai harus diisi'
+                 'required' => 'Tanggal penyerahan harus diisi'
                          ]
          ]
          ]))
@@ -100,11 +99,11 @@ class Penjadwalan extends BaseController
  
          // Insert Data
          $data = $this->penjadwalanModel->save([
-            'id_estimasi' => $this->request->getVar('id_estimasi'),
-            'kode_penjadwalan' => $this->request->getVar('kode_penjadwalan'),
-            'tgl_dimulai' => $this->request->getVar('tgl_dimulai'),
-            'tgl_selesai' => $this->request->getVar('tgl_selesai'),
-            'status' => $this->request->getVar('status'),
+            'id_estimasi'       => $this->request->getVar('id_estimasi'),
+            'kode_penjadwalan'  => $this->request->getVar('kode_penjadwalan'),
+            'tgl_dimulai'       => $this->request->getVar('tgl_dimulai'),
+            'tgl_penyerahan'    => $this->request->getVar('tgl_penyerahan'),
+            'status'            => $this->request->getVar('status'),
          ]);
         //  dd($data);
          
@@ -173,11 +172,11 @@ class Penjadwalan extends BaseController
                     'required' => 'Tanggal harus diisi'
                 ]
             ],
-            'tgl_selesai' => 
+            'tgl_penyerahan' => 
             [
                 'rules' => 'required',
                 'errors' =>[
-                    'required' => 'Tgl_selesai harus diisi'
+                    'required' => 'Tanggal penyerahan harus diisi'
                             ]
             ]
             ]))
@@ -191,7 +190,7 @@ class Penjadwalan extends BaseController
               'id_estimasi'         => $this->request->getVar('id_estimasi'),
               'kode_penjadwalan'    => $this->request->getVar('kode_penjadwalan'),
               'tgl_dimulai'         => $this->request->getVar('tgl_dimulai'),
-              'tgl_selesai'         => $this->request->getVar('tgl_selesai'),
+              'tgl_penyerahan'      => $this->request->getVar('tgl_penyerahan'),
               'status'              => $this->request->getVar('status'),
           ]);
           
