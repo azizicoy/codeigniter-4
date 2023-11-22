@@ -163,7 +163,7 @@ class Mobil extends BaseController
     // =======================UPDATE==================================================
     public function update($id) 
     { 
-           helper('form');
+            helper('form');
            // Rules nama
            $nopolLama = $this->mobilModel->getMobil($this->request->getVar('id_mobil'));
            if($nopolLama['nopol'] == $this->request->getVar('nopol'))
@@ -263,7 +263,7 @@ class Mobil extends BaseController
                return redirect()->to('/mobil/edit/' . $this->request->getVar('id_mobil'))->withInput()->with('validation', $this->validator->getErrors());
            }
           //  simpan data edit
-          $this->mobilModel->save 
+          $tes = $this->mobilModel->save 
           ([
               'id_mobil'        => $id,    
               'id_pemilik'      => $this->request->getVar('id_pemilik'),
@@ -275,7 +275,7 @@ class Mobil extends BaseController
               'model'           => $this->request->getVar('model'),
               'merk'            => $this->request->getVar('merk'),
           ]);
-          
+        //   dd($tes);
           session()->setFlashdata('pesan', 'Data Berhasil Diubah!');
   
           return redirect()->to('/program/mobil/index');

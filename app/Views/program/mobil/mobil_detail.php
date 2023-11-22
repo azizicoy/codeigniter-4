@@ -97,12 +97,11 @@
                         <div class="col">
                             <a href="/mobil/edit/<?= $mobil['id_mobil']; ?>" class="btn btn-success"><i
                                     class="bi bi-pencil"></i> Edit</a>
-                            <form action="/program/mobil/detail/<?= $mobil['id_mobil']; ?>" method="post"
-                                class="d-inline">
+                            <form action="/program/mobil/<?= $mobil['id_mobil']; ?>" method="post" class="d-inline">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Apakah Yaking Ingin Menghapus data?')">Hapus</button>
+                                    onclick="return confirm('Apakah Yakin Ingin Menghapus data?')">Hapus</button>
                             </form>
                         </div>
                         <div class="col text-end">

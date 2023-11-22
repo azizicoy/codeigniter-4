@@ -53,19 +53,19 @@ $routes->get('/pegawai/(:any)', 'Program\Pegawai::detail/$1'); // ROUTES KE CONT
 
 $routes->get('/estimasi', 'Program\Estimasi::index'); // ROUTES KE CONTROLLER ESTIMASI
 $routes->get('/estimasi/edit/(:segment)', 'Program\Estimasi::edit/$1'); // ROUTES KE CONTROLLER EDIT
-// $routes->get('/estimasi/prev/(:any)', 'Program\Estimasi::prev/$1'); // ROUTES KE CONTROLLER ESTIMASI PRINT
 $routes->get('/estimasi/print/(:any)', 'Program\Estimasi::print/$1'); // ROUTES KE CONTROLLER ESTIMASI PRINT
 $routes->delete('/program/estimasi/(:num)', 'Program\Estimasi::delete/$1'); // ROUTES KE CONTROLLER DELETE
 $routes->get('/estimasi/(:any)', 'Program\Estimasi::detail/$1'); // ROUTES KE CONTROLLER ESTIMASI
 
 $routes->get('/mobil', 'Program\Mobil::index'); // ROUTES KE CONTROLLER MOBIL
 $routes->get('/mobil/edit/(:segment)', 'Program\Mobil::edit/$1'); // ROUTES KE CONTROLLER EDIT
-$routes->delete('/mobil/(:num)', 'Program\Mobil::delete/$1'); // ROUTES KE CONTROLLER MOBIL
+$routes->delete('program/mobil/(:num)', 'Program\Mobil::delete/$1'); // ROUTES KE CONTROLLER MOBIL
 $routes->get('/mobil/(:any)', 'Program\Mobil::detail/$1'); // ROUTES KE CONTROLLER MOBIL
 
 $routes->get('/part', 'Program\Part::index'); // ROUTES KE CONTROLLER PART
 $routes->get('/part/part_input', 'Program\Part::input'); // ROUTES KE CONTROLLER PART INPUT
 $routes->get('/part/edit/(:segment)', 'Program\Part::edit/$1'); // ROUTES KE CONTROLLER EDIT
+$routes->delete('program/part/(:num)', 'Program\Part::delete/$1'); // ROUTES KE CONTROLLER MOBIL
 $routes->get('/part/(:any)', 'Program\Part::detail/$1'); // ROUTES KE CONTROLLER PEMILIK
 
 $routes->get('/penjadwalan', 'Program\Penjadwalan::index'); // ROUTES KE CONTROLLER PENJADWALAN

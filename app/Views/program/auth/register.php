@@ -13,7 +13,8 @@
                         <div class="col">
                             <div class="form-floating mb-3 mb-md-0">
                                 <input class="form-control <?= isset($validation['username']) ? 'is-invalid' : ''; ?>"
-                                    id="username" name="username" type="text" placeholder="Masukkan Username" />
+                                    id="username" name="username" type="text" placeholder="Masukkan Username"
+                                    autocomplete="off" />
                                 <label for="username">Username</label>
                                 <!-- error -->
                                 <div class="invalid-feedback">
@@ -28,7 +29,8 @@
                         <div class="col">
                             <div class="form-floating mb-3">
                                 <input class="form-control <?= isset($validation['e_mail']) ? 'is-invalid' : ''; ?>"
-                                    id="e_mail" name="e_mail" type="email" placeholder="Masukkan E-Mail" />
+                                    id="e_mail" name="e_mail" type="email" placeholder="Masukkan E-Mail"
+                                    autocomplete="off" />
                                 <label for="e_mail">E-mail</label>
                                 <!-- error -->
                                 <div class="invalid-feedback">

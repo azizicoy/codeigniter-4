@@ -279,8 +279,7 @@ class Estimasi extends BaseController
     // ================================Update Edit======================================
     public function update($slug) 
     {
-         
-         helper('form');
+        helper('form');
          // Rules nama
          $namaLama = $this->estimasiModel->getEstimasi($this->request->getVar('id_estimasi'));
          if($namaLama['id_pemilik'] == $this->request->getVar('id_pemilik'))
@@ -370,18 +369,61 @@ class Estimasi extends BaseController
          {
              return redirect()->to('/estimasi/edit/' . $this->request->getVar('id_estimasi'))->withInput()->with('validation', $this->validator->getErrors());
          }
-        //  simpan data edit
-        $this->estimasiModel->save 
-        ([
-            'id_estimasi'   => $slug,    
-            'id_pemilik'    => $this->request->getVar('id_pemilik'),
-            'id_mobil'      => $this->request->getVar('id_mobil'),
-            'id_pegawai'    => $this->request->getVar('id_pegawai'),
-            'kode_estimasi' => $this->request->getVar('kode_estimasi'),
-            'tgl_estimasi'  => $this->request->getVar('tgl_estimasi'),
-            'jenis_servis'  => $this->request->getVar('jenis_servis'),
-            'nama_part'     => $this->request->getVar('nama_part'),
-        ]);
+
+          // Variabel Jumlah Harga 
+        $hargaServis = $this->request->getVar('total_harga_servis');
+        $hargaSpart = $this->request->getVar('total_harga');
+        $jumlah = $this->request->getVar('jumlah_part');
+    
+        // Hitung subtotal
+        $subtotal = $hargaServis + ($hargaSpart * $jumlah);
+        
+          //  simpan data edit
+        $this->estimasiModel->update 
+        ($slug, ['id_pemilik'    => $this->request->getVar('id_pemilik'),
+                'id_mobil'      => $this->request->getVar('id_mobil'),
+                'id_pegawai'    => $this->request->getVar('id_pegawai'),
+                'kode_estimasi' => $this->request->getVar('kode_estimasi'),
+                'tgl_estimasi'  => $this->request->getVar('tgl_estimasi'),
+                'jenis_servis'  => $this->request->getVar('jenis_servis'),
+                'nama_part'     => $this->request->getVar('nama_part'),
+                'keluhan'       => $this->request->getVar('keluhan'),
+                'estimasi_biaya'=> $subtotal
+                ]
+        );
+
+        $dataTabelEstimasi = $this->detailEstimasiModel->where('id_detail_estimasi', $slug)->first();
+
+        // Kurangi jumlah spare part di tb_spare_parts
+        $idPart = $this->request->getVar('nama_part');
+        $jumlah = $this->request->getVar('jumlah_part');
+        $this->sparePartModel->decreaseQuantity($idPart, $jumlah);
+
+        // variabel harga servis
+        $hargaServis = $this->request->getVar('total_harga_servis');
+
+        // variabel harga spart
+        $hargaSpart = $this->request->getVar('total_harga');
+
+        // jumlah part
+        $jumlah = $this->request->getVar('jumlah_part');
+
+        // total harga servis + harga part
+        $subtotal = $hargaServis += $hargaSpart;
+        
+        // update data detail estimasi
+        $this->detailEstimasiModel->update 
+        ($dataTabelEstimasi, 
+                ['id_estimasi'      => $slug,
+                'id_jenis_servis'   => $this->request->getVar('jenis_servis'),
+                'id_part'           => $this->request->getVar('nama_part'),
+                'harga_jasa_servis' => $hargaServis,
+                'jumlah'            => $jumlah,
+                'harga'             => $hargaSpart,
+                'subtotal'          => $subtotal
+                ]
+        );
+   
         
         session()->setFlashdata('pesan', 'Data Berhasil Diubah!');
 
